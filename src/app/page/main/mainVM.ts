@@ -1,8 +1,8 @@
 import {computed, observable} from "mobx";
-import TagRequest from "../../requests/tagRequest";
 import ArticleListService from '../../services/articleListService';
 import ArticleListServiceType from '../../services/enums/ArticleListServiceType';
 import VM from '../../libs/VM';
+import TagService from '../../services/tagService';
 
 
 export default class MainVM extends VM {
@@ -16,11 +16,6 @@ export default class MainVM extends VM {
       new ArticleListService(ArticleListServiceType.FEED),
       new ArticleListService(ArticleListServiceType.Tag)
     );
-    this.serviceSeparator = !!this.topPage;
-    TagRequest
-      .instance
-      .getPopularTags()
-      .then(list => this.popularTagList = list);
     this.serviceSeparator = !!this.topPage;
   }
 
@@ -66,13 +61,8 @@ export default class MainVM extends VM {
     this.service.selectedPage = value;
   }
 
-
   @computed get popularTagList(): ReadonlyArray<string> {
-    return this._popularTagList || [];
-  }
-
-  set popularTagList(value: ReadonlyArray<string>) {
-    this._popularTagList = value;
+    return TagService.tags || [];
   }
 
   @computed get service(): ArticleListService {
