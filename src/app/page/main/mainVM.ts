@@ -7,7 +7,7 @@ import VM from '../../libs/VM';
 
 export default class MainVM extends VM {
   static instance = new MainVM();
-  @observable private _topPage: number = -1;
+  @observable private _topPage: number;
   @observable private _clickedTag: string;
   @observable private _popularTagList: ReadonlyArray<string> = [];
 
