@@ -1,6 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.less';
-import App from './app/App';
+import MainVM from './app/mainVM';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+MainVM.instance.init();

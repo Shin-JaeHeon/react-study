@@ -7,9 +7,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "lib": ["es2015", "dom"],
+    "lib": ["es2018", "dom"],
     "esModuleInterop": true,
-    "target": "es5",
+    "target": "es2018",
     "jsx": "react",
     "allowJs": true,
     "typeRoots": [
