@@ -1,0 +1,28 @@
+.list {
+  max-width: 75%;
+  margin: 10px auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  .item {
+    background: white;
+    width: max-content;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    color: #5cb85c;
+
+    &[data-selected=false]:hover {
+      background: #eee;
+    }
+
+    &[data-selected=true] {
+      background: #5cb85c;
+      color: #fff;
+    }
+  }
+
+}

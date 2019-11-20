@@ -1,0 +1,46 @@
+@import "../../lib";
+
+.front {
+  .flex-center;
+  padding: 20px;
+  background: #5cb85c;
+  margin-bottom: 20px;
+
+  h1 {
+    .flex-center;
+    font-size: 3rem;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-family: titillium web, sans-serif;
+    text-shadow: 1px 3px 6px rgba(100, 100, 100, .5);
+  }
+
+  .slogan {
+    font-size: 1.3rem;
+    color: white;
+    font-weight: 100;
+    margin-bottom: 10px;
+  }
+}
+
+section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100vw;
+  max-width: calc(1140px);
+  margin: auto;
+
+  .feedContainer {
+    padding: 20px;
+    min-width: 450px;
+    width: calc(100% - 350px);
+    max-width: (100vw - 40px);
+    margin-right: 25px;
+  }
+  h1 {
+    font-size: 5rem;
+    font-weight: 100;
+  }
+}
