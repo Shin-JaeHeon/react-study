@@ -4,8 +4,8 @@ import {observer} from 'mobx-react';
 import TextInput from "../../widget/input/text-input";
 import Button from "../../widget/input/button";
 import SettingsVM from "./settingsVM";
-import {CommonStore} from "../../store/commonStore";
 import {Redirect} from 'react-router-dom';
+import UserService from '../../services/userService';
 
 @observer
 export default class Settings extends React.Component {
@@ -18,11 +18,11 @@ export default class Settings extends React.Component {
   };
 
   componentDidMount() {
-    if (CommonStore.instance.isLogin) this.store.initialize();
+    if (UserService.instance.isLogin) this.store.initialize();
   }
 
   render() {
-    if (!CommonStore.instance.isLogin) {
+    if (!UserService.instance.isLogin) {
       return <Redirect to="/login"/>;
     }
     return (

@@ -1,6 +1,6 @@
 import {observable, computed} from "mobx";
-import UserRequest from "../../requests/userRequest";
-import {CommonStore} from "../../store/commonStore";
+import UserService from '../../services/userService';
+import HttpClient from '../../libs/httpClient';
 
 export default class RegisterVM {
 
@@ -34,9 +34,12 @@ export default class RegisterVM {
   }
 
   register() {
-    UserRequest
-      .instance
-      .register(this.username, this.email, this.pw)
-      .then(user => CommonStore.instance.user = user);
+    UserService.instance
+      .action('register', this.username, this.email, this.pw)
+      .then(() => HttpClient.updateHeaderByLogin());
+  }
+
+  @computed get isLogin(): boolean {
+    return UserService.instance.isLogin;
   }
 }

@@ -1,6 +1,6 @@
 import {observable, computed} from "mobx";
-import {CommonStore} from "../../store/commonStore";
 import SettingsRequest from "../../requests/settingsRequest";
+import UserService from '../../services/userService';
 
 export default class SettingsVM {
   static instance = new SettingsVM();
@@ -11,7 +11,7 @@ export default class SettingsVM {
   @observable private _password = '';
 
   initialize() {
-    const store = CommonStore.instance;
+    const store = UserService.instance;
     this.email = store.user.email;
     this.image = store.user.image;
     this.bio = store.user.bio;
@@ -23,7 +23,7 @@ export default class SettingsVM {
       .instance
       .update({image: this.image, username: this.username, bio: this.bio, email: this.email}, this.password)
       .then(user => {
-        CommonStore.instance.user = user;
+        UserService.instance.user = user;
         alert('User data Updated');
       });
   }

@@ -8,15 +8,11 @@ export default class UserRequest extends HttpClient {
     super('users');
   }
 
-  async requester(data: object, url = ''): Promise<User> {
-    return new User((await this.axios.post(url, data)).data.user);
-  }
-
   async login(email: string, password: string): Promise<User> {
-    return this.requester({user: {email, password}}, 'login');
+    return (await this.axios.post('', {email, password})).data.user;
   }
 
   async register(username: string, email: string, password: string): Promise<User> {
-    return this.requester({user: {username, email, password}});
+    return (await this.axios.post('', {user: {username, email, password}})).data.user;
   }
 }

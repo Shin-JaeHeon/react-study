@@ -3,14 +3,14 @@ import * as style from './TopNavigation.less';
 import {Link} from "react-router-dom";
 import {observer} from "mobx-react";
 import {observable} from "mobx";
-import {CommonStore} from "./store/commonStore";
+import UserService from './services/userService';
 
 @observer
 export default class TopNavigation extends React.Component {
-  @observable readonly store = CommonStore.instance;
+  @observable readonly service = UserService.instance;
 
   render() {
-    if (this.store.isLogin)
+    if (this.service.isLogin)
       return (
         <header>
           <div className={style["app-title"]}>
@@ -21,7 +21,7 @@ export default class TopNavigation extends React.Component {
               <li><Link to="/">Home</Link></li>
               <li><Link to="/creator">New Post</Link></li>
               <li><Link to="/settings">Settings</Link></li>
-              <li><Link to={`@${this.store.user.username}`}><img src={this.store.user.image} alt=""/>{this.store.user.username}</Link></li>
+              <li><Link to={`@${this.service.user.username}`}><img src={this.service.user.image} alt=""/>{this.service.user.username}</Link></li>
             </ul>
           </div>
         </header>

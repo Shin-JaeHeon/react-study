@@ -1,7 +1,6 @@
 import {observable, computed} from "mobx";
-import {CommonStore} from "../../store/commonStore";
-import UserRequest from "../../requests/userRequest";
 import HttpClient from "../../libs/httpClient";
+import UserService from '../../services/userService';
 
 export default class LoginVM {
 
@@ -26,15 +25,12 @@ export default class LoginVM {
   }
 
   login() {
-    UserRequest.instance
-      .login(this.email, this.pw)
-      .then(user => {
-        CommonStore.instance.user = user;
-        HttpClient.updateHeaderByLogin();
-      });
+    UserService.instance
+      .action('login', this.email, this.pw)
+      .then(() => HttpClient.updateHeaderByLogin());
   }
 
   @computed get isLogin(): boolean {
-    return CommonStore.instance.isLogin;
+    return UserService.instance.isLogin;
   }
 }

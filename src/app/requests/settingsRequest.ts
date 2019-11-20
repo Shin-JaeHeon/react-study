@@ -1,6 +1,5 @@
 import HttpClient from "../libs/httpClient";
 import User from "../models/userModel";
-import {CommonStore} from "../store/commonStore";
 
 export default class SettingsRequest extends HttpClient {
   static instance = new SettingsRequest();

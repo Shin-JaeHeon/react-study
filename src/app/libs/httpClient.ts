@@ -1,5 +1,5 @@
 import axios, {AxiosInstance} from 'axios';
-import {CommonStore} from "../store/commonStore";
+import UserService from '../services/userService';
 
 
 export default class HttpClient {
@@ -16,7 +16,7 @@ export default class HttpClient {
 
   static updateHeaderByLogin() {
     HttpClient.httpClients.forEach(client => client.axiosAuthorized.defaults.headers = {
-      authorization: `Token ${CommonStore.instance.user.token}`
+      authorization: `Token ${UserService.instance.user.token}`
     });
   }
 }

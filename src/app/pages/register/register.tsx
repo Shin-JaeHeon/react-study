@@ -4,7 +4,6 @@ import {observer} from 'mobx-react';
 import TextInput from "../../widget/input/text-input";
 import Button from "../../widget/input/button";
 import RegisterVM from "./registerVM";
-import {CommonStore} from "../../store/commonStore";
 import {Redirect} from 'react-router-dom';
 
 @observer
@@ -15,7 +14,7 @@ export default class Register extends React.Component {
   readonly changed = name => event => this.vm[name] = event.target.value;
 
   render() {
-    if (CommonStore.instance.isLogin) {
+    if (this.vm.isLogin) {
       return <Redirect to='/'/>
     }
     return (
