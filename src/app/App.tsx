@@ -1,15 +1,15 @@
 import React from 'react';
 import './app.less';
 import {Switch, Route, HashRouter} from 'react-router-dom';
-import Main from './page/main/Main';
+import Main from './pages/main/Main';
 import TopNavigation from "./TopNavigation";
-import Login from "./page/login/Login";
-import Register from "./page/register/register";
-import Article from "./page/article/Article";
-import Creator from "./page/creator/Creator";
-import Editor from "./page/editor/Editor";
-import Settings from "./page/settings/Settings";
-import Account from "./page/account/Account";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/register";
+import Article from "./pages/article/Article";
+import Creator from "./pages/creator/Creator";
+import Editor from "./pages/editor/Editor";
+import Settings from "./pages/settings/Settings";
+import Account from "./pages/account/Account";
 
 export default class App extends React.Component {
   render() {

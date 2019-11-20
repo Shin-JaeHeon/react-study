@@ -14,6 +14,4 @@ export default class TagService extends Service {
       .getPopularTags()
       .then(tags => TagService.tags = tags);
   }
-
-
 }
