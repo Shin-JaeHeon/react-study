@@ -20,6 +20,7 @@ export default class UserService extends Service {
   @action
   async action(type: string, ...args) {
     this.user = new User(await this.request[type](...args));
+    return this.user;
   }
 
   @computed get isLogin(): boolean {

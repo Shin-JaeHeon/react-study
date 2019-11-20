@@ -36,7 +36,6 @@ export default class RegisterVM {
   register() {
     UserService.instance
       .action('register', this.username, this.email, this.pw)
-      .then(() => HttpClient.updateHeaderByLogin());
   }
 
   @computed get isLogin(): boolean {

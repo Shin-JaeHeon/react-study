@@ -27,7 +27,7 @@ export default class LoginVM {
   login() {
     UserService.instance
       .action('login', this.email, this.pw)
-      .then(() => HttpClient.updateHeaderByLogin());
+      .then(user => HttpClient.updateHeaderByLogin(user.token));
   }
 
   @computed get isLogin(): boolean {

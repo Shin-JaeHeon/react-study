@@ -1,5 +1,4 @@
 import axios, {AxiosInstance} from 'axios';
-import UserService from '../services/userService';
 
 
 export default class HttpClient {
@@ -14,9 +13,9 @@ export default class HttpClient {
     HttpClient.httpClients.push(this);
   }
 
-  static updateHeaderByLogin() {
+  static updateHeaderByLogin(token) {
     HttpClient.httpClients.forEach(client => client.axiosAuthorized.defaults.headers = {
-      authorization: `Token ${UserService.instance.user.token}`
+      authorization: `Token ${token}`
     });
   }
 }
