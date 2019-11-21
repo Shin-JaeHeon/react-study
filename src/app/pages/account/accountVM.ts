@@ -11,7 +11,6 @@ export default class AccountVM extends VM<ArticleListService> {
   static instance = new AccountVM();
   @observable private _username: string;
   @observable private _userData: Profile;
-  @observable private _topPage: number;
   @observable private _pageList: ReadonlyArray<number>;
   private service3: ArticleService;
 
@@ -22,7 +21,6 @@ export default class AccountVM extends VM<ArticleListService> {
       username: '',
       image: ''
     };
-    this.serviceSeparator = !!this.topPage;
     this.service3 = new ArticleService();
   }
 
@@ -69,11 +67,11 @@ export default class AccountVM extends VM<ArticleListService> {
   }
 
   get topPage(): number {
-    return this._topPage || 0;
+    return this.serviceSeparator || 0;
   }
 
   set topPage(value: number) {
-    this._topPage = value;
+    this.serviceSeparator = value;
     this.selectedPage = 0;
   }
 

@@ -31,13 +31,14 @@ export default class ArticleListService extends Service {
     const {limit, offset} = this;
     switch (this.type) {
       case ArticleListServiceType.Author:
-        await this.loadInternal({author: this._query, limit, offset});
+        await this.loadInternal({author: this.query, limit, offset});
         break;
       case ArticleListServiceType.Tag:
-        await this.loadInternal({tag: this._query, limit, offset});
+        await this.loadInternal({tag: this.query, limit, offset});
         break;
       case ArticleListServiceType.Like:
-        await this.loadInternal({favorited: this._query, limit, offset});
+        await this.loadInternal({favorited: this.query, limit, offset});
+        await this.loadInternal({favorited: this.query, limit, offset});
         break;
       case ArticleListServiceType.FEED:
         await this.loadInternal({limit, offset});
@@ -85,8 +86,7 @@ export default class ArticleListService extends Service {
   }
 
   updateLike(i: number) {
-    const article = this.articleList.list[i];
     const finish = raw => this.articleList[i] = new Article(raw);
-    this.request[(article.isFavorite ? 'set' : 'remove') + 'Like'](article.id).then(finish);
+    this.request[(this.articleList[i].isFavorite ? 'set' : 'remove') + 'Like'](this.articleList[i].id).then(finish);
   }
 }
