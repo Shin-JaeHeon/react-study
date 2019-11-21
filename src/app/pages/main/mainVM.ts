@@ -49,7 +49,6 @@ export default class MainVM extends VM<ArticleListService> {
 
   set topPage(value: number) {
     this.serviceSeparator = value;
-    this.page = 0;
   }
 
   set page(value: number) {

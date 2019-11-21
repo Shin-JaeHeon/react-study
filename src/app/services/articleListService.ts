@@ -77,6 +77,7 @@ export default class ArticleListService extends Service {
 
   set query(value: string) {
     this._query = value;
+    this._selectedPage = 0;
     this.update();
   }
 

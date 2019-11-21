@@ -19,7 +19,7 @@ export default class VM<T> {
     return !this._serviceSeparator ? this._service : (this._service2 ? this._service2 : this._service);
   };
 
-  getAllService(): ReadonlyArray<T> {
+  @computed get allService(): Array<T> {
     return [this._service, this._service2];
   }
 }

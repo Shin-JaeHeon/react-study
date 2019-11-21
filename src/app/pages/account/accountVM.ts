@@ -25,9 +25,10 @@ export default class AccountVM extends VM<ArticleListService> {
   }
 
   init() {
-    AccountRequest.instance.getUserInfo(this.username).then(userData => this.userData = userData);
-    this.getAllService().map((service: ArticleListService) => service.query = this.username);
-    this.service.update();
+    AccountRequest.instance
+      .getUserInfo(this.username)
+      .then(userData => this.userData = userData);
+    this.allService.forEach(service => service.query = this.username);
   }
 
   @computed get articleList(): Array<Article> {
@@ -72,7 +73,6 @@ export default class AccountVM extends VM<ArticleListService> {
 
   set topPage(value: number) {
     this.serviceSeparator = value;
-    this.selectedPage = 0;
   }
 
   updateLike(i: number) {
