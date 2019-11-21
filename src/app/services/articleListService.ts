@@ -10,40 +10,44 @@ export default class ArticleListService extends Service {
   @observable private _query: string;
   @observable articleList: ArticleList;
   @observable private _selectedPage: number;
+  @observable private readonly limit: number;
 
   constructor(private readonly type: ArticleListServiceType) {
     super();
     this.request = ArticleRequest.instance;
-  }
-
-  @action
-  async update() {
     switch (this.type) {
       case ArticleListServiceType.Author:
-        await this.loadInternal({author: this._query, limit: 5, offset: this.offset(5)});
+      case ArticleListServiceType.Like:
+        this.limit = 5;
         break;
       case ArticleListServiceType.Tag:
-        await this.loadInternal({tag: this._query, limit: 10, offset: this.offset(10)});
-        break;
-      case ArticleListServiceType.Like:
-        await this.loadInternal({favorited: this._query, limit: 5, offset: this.offset(5)});
-        break;
       case ArticleListServiceType.FEED:
-        await this.loadInternal({limit: 10, offset: this._selectedPage * 10});
+        this.limit = 10;
         break;
     }
   }
 
-  @action load() {
-    this
-      .update()
-      .then()
-      .catch()
+  async update() {
+    const {limit, offset} = this;
+    switch (this.type) {
+      case ArticleListServiceType.Author:
+        await this.loadInternal({author: this._query, limit, offset});
+        break;
+      case ArticleListServiceType.Tag:
+        await this.loadInternal({tag: this._query, limit, offset});
+        break;
+      case ArticleListServiceType.Like:
+        await this.loadInternal({favorited: this._query, limit, offset});
+        break;
+      case ArticleListServiceType.FEED:
+        await this.loadInternal({limit, offset});
+        break;
+    }
   }
 
-  offset(limit) {
+  @computed get offset() {
     if (this.selectedPage && !isNaN(this.selectedPage)) {
-      return this.selectedPage * limit;
+      return this.selectedPage * this.limit;
     } else {
       return 0;
     }
@@ -58,11 +62,12 @@ export default class ArticleListService extends Service {
   }
 
   @computed get selectedPage(): number {
-    return this._selectedPage;
+    return this._selectedPage || 0;
   }
 
   set selectedPage(value: number) {
     this._selectedPage = value;
+    this.update();
   }
 
   @computed get query(): string {
@@ -71,10 +76,7 @@ export default class ArticleListService extends Service {
 
   set query(value: string) {
     this._query = value;
-    this
-      .update()
-      .then()
-      .catch();
+    this.update();
   }
 
   private async loadInternal(param) {
@@ -82,7 +84,6 @@ export default class ArticleListService extends Service {
     this.articleList = new ArticleList(result.articles, result.articlesCount)
   }
 
-  @action
   updateLike(i: number) {
     const article = this.articleList.list[i];
     const finish = raw => this.articleList[i] = new Article(raw);
