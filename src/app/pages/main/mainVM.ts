@@ -5,8 +5,8 @@ import VM from '../../libs/VM';
 import TagService from '../../services/tagService';
 
 
-export default class MainVM extends VM {
-  static instance = new MainVM();
+export default class MainVM extends VM<ArticleListService> {
+  static instance : MainVM;
   @observable private _topPage: number;
   @observable private _clickedTag: string;
   @observable private _popularTagList: ReadonlyArray<string> = [];
@@ -65,10 +65,6 @@ export default class MainVM extends VM {
     return TagService.tags || [];
   }
 
-  @computed get service(): ArticleListService {
-    return super.getService() as ArticleListService;
-  }
-
   updateLike(i: number) {
     this.service.updateLike(i);
   }
@@ -77,3 +73,5 @@ export default class MainVM extends VM {
     return ['Global Feed', this.clickedTag ? '# ' + this.clickedTag : ''];
   }
 }
+
+MainVM.instance = new MainVM();

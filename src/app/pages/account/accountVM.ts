@@ -7,7 +7,7 @@ import ArticleListServiceType from '../../services/enums/ArticleListServiceType'
 import AccountRequest from '../../requests/accountRequest';
 import VM from '../../libs/VM';
 
-export default class AccountVM extends VM {
+export default class AccountVM extends VM<ArticleListService> {
   static instance = new AccountVM();
   @observable private _username: string;
   @observable private _userData: Profile;
@@ -58,10 +58,6 @@ export default class AccountVM extends VM {
     this._userData = value;
   }
 
-  @computed get service(): ArticleListService {
-    return super.getService() as ArticleListService;
-  }
-
   @computed get selectedPage(): number {
     return this.service.selectedPage || 0;
   }
@@ -89,3 +85,4 @@ export default class AccountVM extends VM {
   }
 
 }
+AccountVM.instance = new AccountVM();
