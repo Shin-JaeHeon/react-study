@@ -87,6 +87,6 @@ export default class ArticleListService extends Service {
   updateLike(i: number) {
     const article = this.articleList.list[i];
     const finish = raw => this.articleList[i] = new Article(raw);
-    this.request[article.isFavorite ? 'set' : 'remove'](article.id).then(finish);
+    this.request[(article.isFavorite ? 'set' : 'remove') + 'Like'](article.id).then(finish);
   }
 }
