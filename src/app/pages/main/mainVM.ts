@@ -6,7 +6,7 @@ import TagService from '../../services/tagService';
 
 
 export default class MainVM extends VM<ArticleListService> {
-  static instance : MainVM;
+  static instance: MainVM;
   @observable private _topPage: number;
   @observable private _clickedTag: string;
   @observable private _popularTagList: ReadonlyArray<string> = [];
@@ -20,10 +20,7 @@ export default class MainVM extends VM<ArticleListService> {
   }
 
   init() {
-    this.service
-      .update()
-      .then()
-      .catch();
+    this.service.update();
   }
 
   @computed get articleList() {

@@ -26,17 +26,18 @@ export default class AccountVM extends VM<ArticleListService> {
     this.service3 = new ArticleService();
   }
 
-  load() {
+  init() {
     AccountRequest.instance.getUserInfo(this.username).then(userData => this.userData = userData);
     this.getAllService().map((service: ArticleListService) => service.query = this.username);
+    this.service.update();
   }
 
   @computed get articleList(): Array<Article> {
-    return this.service.list || [];
+    return this.service.list;
   }
 
   @computed get pageList() {
-    return this.service.pages || [];
+    return this.service.pages;
   }
 
   @computed get userData(): Profile {
@@ -52,6 +53,7 @@ export default class AccountVM extends VM<ArticleListService> {
 
   set username(value: string) {
     this._username = value;
+    this.init();
   }
 
   set userData(value: Profile) {
@@ -64,7 +66,6 @@ export default class AccountVM extends VM<ArticleListService> {
 
   set selectedPage(value: number) {
     this.service.selectedPage = value;
-    this.load();
   }
 
   get topPage(): number {
