@@ -1,6 +1,6 @@
 import * as style from "./main.less";
 import React from "react";
-import PageList from "./view/pageList/PageList";
+import PageList from "../../components/pageList/PageList";
 import PopularTagList from "./view/popularTagList/PopularTagList";
 import {observer} from "mobx-react";
 import FeedList from "../../components/feedList/FeedList";

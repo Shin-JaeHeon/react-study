@@ -1,7 +1,7 @@
 import React from "react";
 import {observer} from "mobx-react";
 import * as style from './pageList.less';
-import mainVM from "../../mainVM";
+import mainVM from "../../pages/main/mainVM";
 
 interface Props {
   page: number;
