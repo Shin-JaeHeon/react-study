@@ -15,7 +15,7 @@ export default class Main extends React.Component {
     if (page === 0) this.vm.clickedTag = '';
     this.vm.topPage = page;
   };
-  pageClicked = page => () => this.vm.page = page;
+  pageClicked = page =>this.vm.page = page;
   likeClicked = (i: number) => this.vm.updateLike(i);
 
   componentDidMount() {
@@ -46,6 +46,4 @@ export default class Main extends React.Component {
       </div>
     );
   }
-
-
 }
