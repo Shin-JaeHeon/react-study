@@ -8,7 +8,7 @@ import Service from '../libs/Service';
 export default class ArticleListService extends Service {
   readonly request: ArticleRequest;
   @observable private _query: string;
-  @observable articleList: ArticleList;
+  @observable private _articleList: ArticleList;
   @observable private _selectedPage: number;
   @observable private readonly limit: number;
 
@@ -81,9 +81,17 @@ export default class ArticleListService extends Service {
     this.update();
   }
 
+  get articleList(): ArticleList {
+    return this._articleList;
+  }
+
+  set articleList(value: ArticleList) {
+    this._articleList = value;
+  }
+
   private async loadInternal(param) {
     const result = await this.request.loadArticlesExternal(param);
-    this.articleList = new ArticleList(result.articles, result.articlesCount)
+    this.articleList = new ArticleList(result.articles, result.articlesCount);
   }
 
   updateLike(i: number) {
