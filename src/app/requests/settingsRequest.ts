@@ -9,6 +9,6 @@ export default class SettingsRequest extends HttpClient {
   }
 
   async update(user: object, password = null): Promise<User> {
-    return new User((await this.axiosAuthorized.put('',  password ? {user: {...user, password}} : {user})).data.user);
+    return new User((await this.axios.put('',  password ? {user: {...user, password}} : {user})).data.user);
   }
 }

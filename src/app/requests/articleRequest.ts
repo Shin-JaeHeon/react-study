@@ -20,7 +20,7 @@ export default class ArticleRequest extends HttpClient {
   }
 
   async deleteArticle(id: string): Promise<void> {
-    await this.axiosAuthorized.delete('/' + id);
+    await this.axios.delete('/' + id);
   }
 
   async loadArticlesExternal(params: Object): Promise<LoadArticlesResult> {
@@ -28,18 +28,18 @@ export default class ArticleRequest extends HttpClient {
   }
 
   async update(id: string, article: DraftFeed): Promise<Article> {
-    return (await this.axiosAuthorized.put('/' + id, {article})).data.article;
+    return (await this.axios.put('/' + id, {article})).data.article;
   }
 
   async publish(article: DraftFeed): Promise<Article> {
-    return (await this.axiosAuthorized.post('', {article})).data.article;
+    return (await this.axios.post('', {article})).data.article;
   }
 
   async setLike(id: string): Promise<Article> {
-    return (await this.axiosAuthorized.post(`/${id}/favorite`)).data.article;
+    return (await this.axios.post(`/${id}/favorite`)).data.article;
   }
 
   async removeLike(id: string): Promise<Article> {
-    return (await this.axiosAuthorized.delete(`/${id}/favorite`)).data.article;
+    return (await this.axios.delete(`/${id}/favorite`)).data.article;
   }
 }
