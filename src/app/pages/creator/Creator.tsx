@@ -9,23 +9,23 @@ import CreatorVM from "./creatorVM";
 
 @observer
 export default class Creator extends React.Component {
-  readonly store = CreatorVM.instance;
-  readonly handler = () => this.store.publish();
-  readonly changed = name => event => this.store[name] = event.target.value;
+  readonly vm = CreatorVM.instance;
+  readonly handler = () => this.vm.publish();
+  readonly changed = name => event => this.vm[name] = event.target.value;
   readonly entered = event => {
     if (event.key === 'Enter') {
-      this.store.addTag(event.target.value);
+      this.vm.addTag(event.target.value);
       event.target.value = '';
     }
   };
 
   componentDidMount() {
-    this.store.clearRedirectID();
+    this.vm.clearRedirectID();
   }
 
   render() {
-    if (this.store.redirectID !== '') {
-      return <Redirect to={`article/${this.store.redirectID}`}/>
+    if (this.vm.redirectID !== '' && this.vm.redirectID) {
+      return <Redirect to={`article/${this.vm.redirectID}`}/>
     }
     return (
       <div className={style.editorContainer}>
@@ -36,7 +36,7 @@ export default class Creator extends React.Component {
                     onChange={this.changed('body')}/>
           <TextInput placeholder="Enter tags" onKeyDown={this.entered}/>
           <div className={style.tagsContainer}>
-            <TagList tagList={this.store.tagList} store={this.store}/>
+            <TagList tagList={this.vm.tagList} store={this.vm}/>
           </div>
           <Button handler={this.handler}>Publish Article</Button>
         </div>

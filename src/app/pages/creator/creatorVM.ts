@@ -2,12 +2,20 @@ import {observable, computed} from "mobx";
 import ArticleRequest from "../../requests/articleRequest";
 
 export default class CreatorVM {
-  static instance = new CreatorVM();
-  @observable private _title: string = '';
-  @observable private _description: string = '';
-  @observable private _body: string = '';
-  @observable private _tagList: Array<string> = [];
-  @observable private _redirectID: string = '';
+  static instance: CreatorVM;
+  @observable private _title: string;
+  @observable private _description: string;
+  @observable private _body: string;
+  @observable private _tagList: Array<string>;
+  @observable private _redirectID: string;
+
+  constructor() {
+    this._title = '';
+    this._description = '';
+    this._body = '';
+    this._tagList = [];
+    this._redirectID = '';
+  }
 
   publish() {
     const {title, description, body, tagList} = this;
@@ -41,8 +49,8 @@ export default class CreatorVM {
     this._body = value;
   }
 
-  get tagList(): Array<string> {
-    return this._tagList;
+  @computed get tagList(): Array<string> {
+    return this._tagList || [];
   }
 
   set tagList(value: Array<string>) {
@@ -50,7 +58,7 @@ export default class CreatorVM {
   }
 
   addTag(value: string) {
-    if (!this._tagList.includes(value)) this._tagList.push(value);
+    if (!this.tagList.includes(value)) this._tagList.push(value);
   }
 
   @computed get redirectID() {
@@ -65,3 +73,5 @@ export default class CreatorVM {
     this.redirectID = '';
   }
 }
+
+CreatorVM.instance = new CreatorVM();

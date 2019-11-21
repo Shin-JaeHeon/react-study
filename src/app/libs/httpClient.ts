@@ -1,4 +1,4 @@
-import axios, {AxiosInstance} from 'axios';
+import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 
 
 export default class HttpClient {
@@ -8,6 +8,10 @@ export default class HttpClient {
   constructor(URL) {
     const baseURL = `https://conduit.productionready.io/api/${URL}`;
     this.axios = axios.create({baseURL});
+    this.axios.interceptors.response.use(undefined, function (error) {
+      console.error(error);
+      return Promise.reject(error);
+    });
     HttpClient.httpClients.push(this);
   }
 

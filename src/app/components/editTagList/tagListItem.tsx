@@ -4,7 +4,6 @@ import * as style from './tagList.less';
 
 interface Props {
   tag: string;
-  i: number;
   handler: () => void;
 }
 

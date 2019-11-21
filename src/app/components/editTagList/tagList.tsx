@@ -22,7 +22,7 @@ export default class TagList extends React.Component<Props> {
     return (
       <div className={style.tags}>
         {this.props.tagList.map((tag, i) => (
-          <TagListItem tag={tag} key={i} i={i} handler={this.handler(i)}/>
+          <TagListItem tag={tag} key={i} handler={this.handler(i)}/>
         ))}
       </div>
     );
