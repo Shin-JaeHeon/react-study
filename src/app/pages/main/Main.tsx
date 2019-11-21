@@ -25,7 +25,7 @@ export default class Main extends React.Component {
   render() {
     const {topPage, articleList, popularTagList, pageList, topPageList} = this.vm;
     return (
-      <div>
+      <main>
         <div className={style.front}>
           <div>
             <h1>conduit</h1>
@@ -42,8 +42,10 @@ export default class Main extends React.Component {
           </div>
           <PopularTagList tagList={popularTagList} handler={this.tagClicked}/>
         </section>
-        <PageList pageList={pageList} handler={this.pageClicked}/>
-      </div>
+        <footer>
+         <PageList pageList={pageList} handler={this.pageClicked}/>
+        </footer>
+      </main>
     );
   }
 }
