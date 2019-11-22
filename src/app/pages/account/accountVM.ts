@@ -2,7 +2,6 @@ import {computed, observable} from "mobx";
 import Article from "app/models/articleModel";
 import {Profile} from "../../interface";
 import ArticleListService from '../../services/articleListService';
-import ArticleService from '../../services/articleService';
 import ArticleListServiceType from '../../services/enums/ArticleListServiceType';
 import AccountRequest from '../../requests/accountRequest';
 import VM from '../../libs/VM';
@@ -12,7 +11,6 @@ export default class AccountVM extends VM<ArticleListService> {
   @observable private _username: string;
   @observable private _userData: Profile;
   @observable private _pageList: ReadonlyArray<number>;
-  private service3: ArticleService;
 
   constructor() {
     super(new ArticleListService(ArticleListServiceType.Author),
@@ -21,7 +19,6 @@ export default class AccountVM extends VM<ArticleListService> {
       username: '',
       image: ''
     };
-    this.service3 = new ArticleService();
   }
 
   init() {
