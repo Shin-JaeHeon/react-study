@@ -35,8 +35,9 @@ export default class ArticleService extends Service {
     this.article = new Article(await this.request.update(id, article))
   }
 
-  publish(article: DraftFeed) {
-    this.request.publish(article).then(this.finish);
+  async publish() {
+    const {title, description, body, tagList} = this.article;
+    return this.request.publish({title, description, body, tagList});
   }
 
   delete() {

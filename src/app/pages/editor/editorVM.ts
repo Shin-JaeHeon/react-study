@@ -21,9 +21,9 @@ export default class EditorVM extends VM<ArticleService> {
 
   load() {
     ArticleRequest.instance.loadArticle(this.id).then(article => {
-      this.tagList = article.tags;
+      this.tagList = article.tagList;
       this.title = article.title;
-      this._body = article.article;
+      this._body = article.body;
       this.description = article.description;
     });
   }

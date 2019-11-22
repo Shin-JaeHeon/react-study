@@ -1,64 +1,62 @@
 import {observable, computed} from "mobx";
-import ArticleRequest from "../../requests/articleRequest";
+import VM from '../../libs/VM';
+import ArticleService from '../../services/articleService';
+import Article from '../../models/articleModel';
 
-export default class CreatorVM {
+export default class CreatorVM extends VM<ArticleService> {
   static instance: CreatorVM;
-  @observable private _title: string;
-  @observable private _description: string;
-  @observable private _body: string;
-  @observable private _tagList: Array<string>;
   @observable private _redirectID: string;
 
   constructor() {
-    this._title = '';
-    this._description = '';
-    this._body = '';
-    this._tagList = [];
-    this._redirectID = '';
+    super(new ArticleService());
+    this.redirectID = '';
   }
 
   publish() {
-    const {title, description, body, tagList} = this;
-    ArticleRequest
-      .instance
-      .publish({title, description, body, tagList})
+    this.service
+      .publish()
       .then(article => this.redirectID = article.id);
   }
 
+  @computed get article(): Article {
+    return this.service.article;
+  }
+
   @computed get title(): string {
-    return this._title;
+    return this.article.title;
   }
 
   set title(value: string) {
-    this._title = value;
+    this.article.title = value;
   }
 
   @computed get description(): string {
-    return this._description;
+    return this.article.description;
   }
 
   set description(value: string) {
-    this._description = value;
+    this.article.description = value;
   }
 
   @computed get body(): string {
-    return this._body;
+    return this.article.body;
   }
 
   set body(value: string) {
-    this._body = value;
+    this.article.body = value;
   }
 
   @computed get tagList(): Array<string> {
-    return this._tagList || [];
+    return this.article.tagList || [];
   }
 
   set tagList(value: Array<string>) {
-    this._tagList = value;
+    this.article.tagList = value;
   }
 
   addTag(value: string) {
-    if (!this.tagList.includes(value)) this._tagList.push(value);
+    if (!this.article.tagList.includes(value))
+      this.article.tagList.push(value);
   }
 
   @computed get redirectID() {

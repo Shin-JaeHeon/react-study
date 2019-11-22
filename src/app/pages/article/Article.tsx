@@ -48,8 +48,8 @@ export default class Article extends React.Component<Props> {
         </div>
         <div className={style.article}>
           <div className={style.inner}>
-            <article>{article.article}</article>
-            <TagList tagList={article.tags}/>
+            <article>{article.body}</article>
+            <TagList tagList={article.tagList}/>
             <hr/>
           </div>
         </div>

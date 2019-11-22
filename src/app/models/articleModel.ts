@@ -5,10 +5,10 @@ export default class Article {
   private _date: string;
   private _title: string;
   private _description: string;
-  private _article: string;
+  private _body: string;
   private _isFavorite: boolean;
   private _favoritesCount: number;
-  private _tags: Array<string>;
+  private _tagList: Array<string>;
 
   static getEmptyObject(): Article {
     return new Article({
@@ -20,7 +20,7 @@ export default class Article {
       date: '',
       title: '',
       description: '',
-      article: '',
+      body: '',
       isFavorite: false,
       favoritesCount: 0,
       tagList: []
@@ -34,10 +34,10 @@ export default class Article {
     this._date = rawData.createdAt;
     this._title = rawData.title;
     this._description = rawData.description;
-    this._article = rawData.body;
+    this._body = rawData.body;
     this._isFavorite = rawData.favorited;
     this._favoritesCount = rawData.favoritesCount;
-    this._tags = rawData.tagList;
+    this._tagList = rawData.tagList;
   }
 
   get username(): string {
@@ -88,12 +88,12 @@ export default class Article {
     this._description = value;
   }
 
-  get article(): string {
-    return this._article;
+  get body(): string {
+    return this._body;
   }
 
-  set article(value: string) {
-    this._article = value;
+  set body(value: string) {
+    this._body = value;
   }
 
   get isFavorite(): boolean {
@@ -112,11 +112,11 @@ export default class Article {
     this._favoritesCount = value;
   }
 
-  get tags(): Array<string> {
-    return this._tags;
+  get tagList(): Array<string> {
+    return this._tagList;
   }
 
-  set tags(value: Array<string>) {
-    this._tags = value;
+  set tagList(value: Array<string>) {
+    this._tagList = value;
   }
 }
