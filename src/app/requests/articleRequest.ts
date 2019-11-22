@@ -1,11 +1,16 @@
 import Article from "../models/articleModel";
 import HttpClient from "../libs/httpClient";
-import {DraftFeed} from "../interface";
-import {AxiosResponse} from "axios";
 
 interface LoadArticlesResult {
   articles: Array<Object>;
   articlesCount: number;
+}
+
+interface DraftFeed {
+  title: string;
+  description: string;
+  body: string;
+  tagList: Array<string>;
 }
 
 export default class ArticleRequest extends HttpClient {
