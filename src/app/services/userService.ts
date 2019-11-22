@@ -17,7 +17,6 @@ export default class UserService extends Service {
     this.request = UserRequest.instance;
   }
 
-  @action
   async action(type: string, ...args) {
     this.user = new User(await this.request[type](...args));
     return this.user;

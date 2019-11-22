@@ -7,7 +7,7 @@ export default class ArticleList {
 
   constructor(articles: Array<Object>, count) {
     this._list = articles.map(article => new Article(article));
-    this._pages = [...new Array(Math.floor(count / 5) + ((count % 5) ? 1 : 0))].map((_, i) => i);
+    this._pages = [...new Array(~~(count / 5) + ((count % 5) ? 1 : 0))].map((_, i) => i);
   }
 
   get pages(): ReadonlyArray<number> {
