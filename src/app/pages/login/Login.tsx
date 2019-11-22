@@ -1,8 +1,8 @@
 import React from 'react';
 import * as style from './login.less';
 import {observer} from 'mobx-react';
-import TextInput from "../../widget/input/text-input";
-import Button from "../../widget/input/button";
+import TextInput from "../../widgets/input/text-input";
+import Button from "../../widgets/input/button";
 import loginVM from "./loginVM";
 import {Redirect} from 'react-router-dom';
 

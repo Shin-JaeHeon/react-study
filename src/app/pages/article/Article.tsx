@@ -2,7 +2,7 @@ import React from 'react';
 import * as style from './article.less';
 import {observer} from 'mobx-react';
 import {Link, Redirect} from 'react-router-dom';
-import Profile from "./views/profile/profile";
+import Profile from "../../components/profile/profile";
 import TagList from "../../components/tagList/tagList";
 import ArticleVM from "./articleVM";
 
