@@ -1,16 +1,10 @@
 import {observable, computed} from "mobx";
 import Article from "app/models/articleModel";
-import ArticleRequest from "../../requests/articleRequest";
 import VM from '../../libs/VM';
 import ArticleService from '../../services/articleService';
 
 export default class EditorVM extends VM<ArticleService> {
   static instance: EditorVM;
-  @observable private _id: string = '';
-  @observable private _title: string = '';
-  @observable private _description: string = '';
-  @observable private _body: string = '';
-  @observable private _tagList: Array<string> = [];
   @observable private _redirectID = '';
   @observable private _article: Article = null;
 
@@ -19,57 +13,55 @@ export default class EditorVM extends VM<ArticleService> {
 
   }
 
-  load() {
-    ArticleRequest.instance.loadArticle(this.id).then(article => {
-      this.tagList = article.tagList;
-      this.title = article.title;
-      this._body = article.body;
-      this.description = article.description;
-    });
+  @computed get article(): Article {
+    return this.service.article;
+  }
+
+  load(id: string) {
+    this.service.load(id);
   }
 
   update() {
-    const article = {title: this.title, description: this.description, body: this.body, tagList: this.tagList};
-    this.service.update(this.id, article)
-      .then(() => this.redirectID = this.id)
-      .catch(() => alert(`Update Failed!!`)
-      );
+    this.service
+      .update()
+      .then(() => this.redirectID = this.article.id)
+      .catch(() => alert(`Update Failed!!`));
   }
 
   @computed get title(): string {
-    return this._title;
+    return this.article.title;
   }
 
   set title(value: string) {
-    this._title = value;
+    this.article.title = value;
   }
 
   @computed get description(): string {
-    return this._description;
+    return this.article.description;
   }
 
   set description(value: string) {
-    this._description = value;
+    this.article.description = value;
   }
 
   @computed get body(): string {
-    return this._body;
+    return this.article.body;
   }
 
   set body(value: string) {
-    this._body = value;
+    this.article.body = value;
   }
 
   @computed get tagList(): Array<string> {
-    return this._tagList;
+    return this.article.tagList;
   }
 
   set tagList(value: Array<string>) {
-    this._tagList = value;
+    this.article.tagList = value;
   }
 
   addTag(value: string) {
-    if (!this._tagList.includes(value)) this._tagList.push(value);
+    if (!this.article.tagList.includes(value)) this.article.tagList.push(value);
   }
 
   @computed get redirectID() {
@@ -78,14 +70,6 @@ export default class EditorVM extends VM<ArticleService> {
 
   set redirectID(value: string) {
     this._redirectID = value;
-  }
-
-  @computed get id(): string {
-    return this._id;
-  }
-
-  set id(value: string) {
-    this._id = value;
   }
 
   clearRedirectID() {

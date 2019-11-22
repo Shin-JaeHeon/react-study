@@ -1,6 +1,5 @@
 import {computed, observable} from "mobx";
 import ArticleRequest from '../requests/articleRequest';
-import {DraftFeed} from '../interface';
 import Article from '../models/articleModel';
 import Service from '../libs/Service';
 
@@ -16,7 +15,7 @@ export default class ArticleService extends Service {
 
   load(id: string) {
     this.request.loadArticle(id)
-      .then(article => this.article = article);
+      .then(article => this.article = new Article(article));
   }
 
   @computed get article(): Article {
@@ -27,12 +26,9 @@ export default class ArticleService extends Service {
     this._article = value;
   }
 
-  private finish(article: Article) {
-    this.article = new Article(article);
-  }
-
-  async update(id: string, article: DraftFeed) {
-    this.article = new Article(await this.request.update(id, article))
+  async update() {
+    const {title, description, body, tagList} = this.article;
+    return await this.request.update(this.article.id, {title, description, body, tagList});
   }
 
   async publish() {

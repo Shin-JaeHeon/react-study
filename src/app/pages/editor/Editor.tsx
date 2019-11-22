@@ -25,8 +25,7 @@ export default class Editor extends React.Component<Props> {
 
   componentDidMount() {
     this.vm.clearRedirectID();
-    this.vm.id = this.props.match.params.id;
-    this.vm.load();
+    this.vm.load(this.props.match.params.id);
   }
 
   render() {
