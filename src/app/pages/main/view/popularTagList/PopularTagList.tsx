@@ -1,7 +1,7 @@
 import {observer} from "mobx-react";
 import React from "react";
-import PopularTagListItem from "./PopularTagListItem";
 import * as style from './popularTagList.less';
+import TagListItem from '../../../../components/tagList/tagListItem';
 
 interface Props {
   tagList: ReadonlyArray<string>,
@@ -15,7 +15,7 @@ export default class PopularTagList extends React.Component<Props> {
       <div className={style.tags}>
         <div className={style.title}>Popular Tags</div>
         {this.props.tagList.map((tag, i) => (
-          <PopularTagListItem tag={tag} key={i} handler={this.props.handler(tag)}/>
+          <TagListItem tag={tag} key={i} onClick={this.props.handler(tag)}/>
         ))}
       </div>
     );

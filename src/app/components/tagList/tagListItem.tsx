@@ -4,11 +4,13 @@ import * as style from './tagList.less';
 
 interface Props {
   tag: string;
+  onClick?: (event) => void;
 }
 
 @observer
 export default class TagListItem extends React.Component<Props> {
   render() {
-    return (<div className={style.tag}>{this.props.tag}</div>);
+    const {tag, onClick} = this.props;
+    return (<div className={style.tag} onClick={onClick}>{tag}</div>);
   }
 }
