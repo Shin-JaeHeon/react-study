@@ -6,13 +6,6 @@ interface LoadArticlesResult {
   articlesCount: number;
 }
 
-interface DraftFeed {
-  title: string;
-  description: string;
-  body: string;
-  tagList: Array<string>;
-}
-
 export default class ArticleRequest extends HttpClient {
   static instance = new ArticleRequest();
 
@@ -32,11 +25,11 @@ export default class ArticleRequest extends HttpClient {
     return (await this.axios.get('', {params})).data;
   }
 
-  async update(id: string, article: DraftFeed): Promise<Article> {
+  async update(id: string, article): Promise<Article> {
     return (await this.axios.put('/' + id, {article})).data.article;
   }
 
-  async publish(article: DraftFeed): Promise<Article> {
+  async publish(article): Promise<Article> {
     return (await this.axios.post('', {article})).data.article;
   }
 
