@@ -9,16 +9,16 @@ import UserService from '../../services/userService';
 
 @observer
 export default class Settings extends React.Component {
-  readonly store = SettingsVM.instance;
-  readonly changed = name => event => this.store[name] = event.target.value;
-  readonly handler = () => this.store.update();
+  readonly vm = SettingsVM.instance;
+  readonly changed = name => event => this.vm[name] = event.target.value;
+  readonly handler = () => this.vm.update();
 
   readonly handleChange = (inputType: string, value: string) => {
 
   };
 
   componentDidMount() {
-    if (UserService.instance.isLogin) this.store.initialize();
+    if (UserService.instance.isLogin) this.vm.initialize();
   }
 
   render() {
@@ -31,22 +31,22 @@ export default class Settings extends React.Component {
           <h1>Your Settings</h1>
           <TextInput placeholder="URL of Picture"
                      onChange={this.changed('image')}
-                     value={this.store.image}/>
+                     value={this.vm.image}/>
           <TextInput placeholder="username"
                      onChange={this.changed('username')}
-                     value={this.store.username}/>
+                     value={this.vm.username}/>
           <textarea className={style.customTextArea}
                     placeholder="Short bio about you"
                     onChange={this.changed('bio')}
-                    value={this.store.bio}/>
+                    value={this.vm.bio}/>
           <TextInput placeholder="Email"
                      type="email"
                      onChange={this.changed('email')}
-                     value={this.store.email}/>
+                     value={this.vm.email}/>
           <TextInput placeholder="New Password"
                      type="password"
                      onChange={this.changed('password')}
-                     value={this.store.password}/>
+                     value={this.vm.password}/>
           <Button handler={this.handler}>Update Settings</Button>
         </div>
       </div>

@@ -44,7 +44,7 @@ export default class Editor extends React.Component<Props> {
                     onChange={changed} name="body" value={this.vm.body}/>
           <TextInput placeholder="Enter tags" onKeyDown={this.entered}/>
           <div className={style.tagsContainer}>
-            <TagList tagList={this.vm.tagList} store={this.vm}/>
+            <TagList tagList={this.vm.tagList} vm={this.vm}/>
           </div>
           <Button handler={this.handler}>Publish Article</Button>
         </div>

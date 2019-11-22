@@ -11,11 +11,11 @@ export default class SettingsVM {
   @observable private _password = '';
 
   initialize() {
-    const store = UserService.instance;
-    this.email = store.user.email;
-    this.image = store.user.image;
-    this.bio = store.user.bio;
-    this.username = store.user.username;
+    const vm = UserService.instance;
+    this.email = vm.user.email;
+    this.image = vm.user.image;
+    this.bio = vm.user.bio;
+    this.username = vm.user.username;
   }
 
   update() {

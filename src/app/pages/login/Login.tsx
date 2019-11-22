@@ -10,12 +10,12 @@ import {Redirect} from 'react-router-dom';
 
 @observer
 export default class Login extends React.Component {
-  readonly store = loginVM.instance;
-  readonly handler = () => this.store.login();
-  readonly changed = name => event => this.store[name] = event.target.value;
+  readonly vm = loginVM.instance;
+  readonly handler = () => this.vm.login();
+  readonly changed = name => event => this.vm[name] = event.target.value;
 
   render() {
-    if (this.store.isLogin) {
+    if (this.vm.isLogin) {
       return <Redirect to='/'/>
     }
     return (

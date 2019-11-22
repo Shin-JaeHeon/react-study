@@ -12,28 +12,28 @@ interface Props {
 
 @observer
 export default class Article extends React.Component<Props> {
-  readonly store = ArticleVM.instance;
+  readonly vm = ArticleVM.instance;
 
   deleteHandler = () => {
-    this.store.delete();
+    this.vm.delete();
   };
 
   componentDidMount() {
-    this.store.load(this.props.match.params.id);
+    this.vm.load(this.props.match.params.id);
   }
 
   render() {
-    if (this.store.isDeleted) {
+    if (this.vm.isDeleted) {
       return <Redirect to={`/`}/>
     }
     return (
       <div className={style.articleContainer}>
         <div className={style.header}>
           <div className={style.inner}>
-            <h1>{this.store.article.title}</h1>
+            <h1>{this.vm.article.title}</h1>
             <div className={style.profile}>
-              <Profile username={this.store.article.username} date={this.store.article.date} image={this.store.article.userImage}/>
-              <Link to={`/editor/${this.store.article.id}`}>
+              <Profile username={this.vm.article.username} date={this.vm.article.date} image={this.vm.article.userImage}/>
+              <Link to={`/editor/${this.vm.article.id}`}>
                 <button className={style.editorButton}>Edit Article</button>
               </Link>
               <button className={style.deleteButton} onClick={this.deleteHandler}>Delete Article</button>
@@ -42,8 +42,8 @@ export default class Article extends React.Component<Props> {
         </div>
         <div className={style.article}>
           <div className={style.inner}>
-            <article>{this.store.article.article}</article>
-            <TagList tagList={this.store.article.tags}/>
+            <article>{this.vm.article.article}</article>
+            <TagList tagList={this.vm.article.tags}/>
             <hr/>
           </div>
         </div>

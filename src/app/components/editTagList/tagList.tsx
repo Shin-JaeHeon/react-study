@@ -4,7 +4,7 @@ import TagListItem from "./tagListItem";
 import * as style from './tagList.less';
 
 interface Props {
-  store: {
+  vm: {
     tagList
   };
   tagList: ReadonlyArray<string>;
@@ -14,8 +14,8 @@ interface Props {
 @observer
 export default class TagList extends React.Component<Props> {
   handler = i => () => {
-    this.props.store.tagList =
-      this.props.store.tagList.reduce((prev, now, index) => index !== i ? [...prev, now] : prev, []);
+    this.props.vm.tagList =
+      this.props.vm.tagList.reduce((prev, now, index) => index !== i ? [...prev, now] : prev, []);
   };
 
   render() {
