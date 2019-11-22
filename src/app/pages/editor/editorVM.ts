@@ -1,9 +1,11 @@
 import {observable, computed} from "mobx";
 import Article from "app/models/articleModel";
 import ArticleRequest from "../../requests/articleRequest";
+import VM from '../../libs/VM';
+import ArticleService from '../../services/articleService';
 
-export default class EditorVM {
-  static instance = new EditorVM();
+export default class EditorVM extends VM<ArticleService> {
+  static instance: EditorVM;
   @observable private _id: string = '';
   @observable private _title: string = '';
   @observable private _description: string = '';
@@ -11,6 +13,11 @@ export default class EditorVM {
   @observable private _tagList: Array<string> = [];
   @observable private _redirectID = '';
   @observable private _article: Article = null;
+
+  constructor() {
+    super(new ArticleService(), null);
+
+  }
 
   load() {
     ArticleRequest.instance.loadArticle(this.id).then(article => {
@@ -23,10 +30,10 @@ export default class EditorVM {
 
   update() {
     const article = {title: this.title, description: this.description, body: this.body, tagList: this.tagList};
-    ArticleRequest
-      .instance
-      .update(this.id, article)
-      .then(article => this.redirectID = article.id);
+    this.service.update(this.id, article)
+      .then(() => this.redirectID = this.id)
+      .catch(() => alert(`Update Failed!!`)
+      );
   }
 
   @computed get title(): string {
@@ -80,8 +87,10 @@ export default class EditorVM {
   set id(value: string) {
     this._id = value;
   }
-  clearRedirectID(){
+
+  clearRedirectID() {
     this.redirectID = '';
   }
 
 }
+EditorVM.instance = new EditorVM();

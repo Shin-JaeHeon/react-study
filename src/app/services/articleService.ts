@@ -26,8 +26,8 @@ export default class ArticleService extends Service {
     this.article = new Article(article);
   }
 
-  update(id: string, article: DraftFeed) {
-    this.request.update(id, article).then(this.finish);
+  async update(id: string, article: DraftFeed) {
+    this.article = new Article(await this.request.update(id, article))
   }
 
   publish(article: DraftFeed) {
