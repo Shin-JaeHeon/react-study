@@ -22,4 +22,5 @@ export default class VM<T> {
   @computed get allService(): Array<T> {
     return [this._service, this._service2];
   }
+
 }

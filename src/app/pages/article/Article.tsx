@@ -22,18 +22,24 @@ export default class Article extends React.Component<Props> {
     this.vm.load(this.props.match.params.id);
   }
 
+  componentDidUpdate() {
+    this.vm.load(this.props.match.params.id);
+  }
+
   render() {
-    if (this.vm.isDeleted) {
+    const {isDeleted, article} = this.vm;
+    if (isDeleted) {
       return <Redirect to={`/`}/>
     }
     return (
       <div className={style.articleContainer}>
         <div className={style.header}>
           <div className={style.inner}>
-            <h1>{this.vm.article.title}</h1>
+            <h1>{article.title}</h1>
             <div className={style.profile}>
-              <Profile username={this.vm.article.username} date={this.vm.article.date} image={this.vm.article.userImage}/>
-              <Link to={`/editor/${this.vm.article.id}`}>
+              <Profile username={article.username} date={article.date}
+                       image={article.userImage}/>
+              <Link to={`/editor/${article.id}`}>
                 <button className={style.editorButton}>Edit Article</button>
               </Link>
               <button className={style.deleteButton} onClick={this.deleteHandler}>Delete Article</button>
@@ -42,8 +48,8 @@ export default class Article extends React.Component<Props> {
         </div>
         <div className={style.article}>
           <div className={style.inner}>
-            <article>{this.vm.article.article}</article>
-            <TagList tagList={this.vm.article.tags}/>
+            <article>{article.article}</article>
+            <TagList tagList={article.tags}/>
             <hr/>
           </div>
         </div>

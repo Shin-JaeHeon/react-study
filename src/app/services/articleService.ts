@@ -14,8 +14,13 @@ export default class ArticleService extends Service {
     this.request = ArticleRequest.instance;
   }
 
+  load(id: string) {
+    this.request.loadArticle(id)
+      .then(article => this.article = article);
+  }
+
   @computed get article(): Article {
-    return this._article;
+    return this._article || Article.getEmptyObject();
   }
 
   set article(value: Article) {
@@ -32,5 +37,13 @@ export default class ArticleService extends Service {
 
   publish(article: DraftFeed) {
     this.request.publish(article).then(this.finish);
+  }
+
+  delete() {
+    ArticleRequest
+      .instance
+      .deleteArticle(this.article.id)
+      .then(() => this.article = null)
+      .catch(() => alert('Delete Failed!'));
   }
 }

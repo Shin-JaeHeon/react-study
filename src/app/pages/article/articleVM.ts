@@ -1,38 +1,30 @@
-import {computed, observable} from "mobx";
-import ArticleRequest from "../../requests/articleRequest";
+import {computed} from "mobx";
 import Article from "../../models/articleModel";
+import VM from '../../libs/VM';
+import ArticleService from '../../services/articleService';
 
-export default class ArticleVM {
+export default class ArticleVM extends VM<ArticleService> {
+  static instance: ArticleVM;
 
-  static instance = new ArticleVM();
-  @observable id: string = '';
-  @observable private _article: Article;
+  constructor() {
+    super(new ArticleService());
+  }
 
   load(id: string) {
-    this.id = id;
-    ArticleRequest
-      .instance
-      .loadArticle(id)
-      .then(article => this.article = article);
+    this.service.load(id);
   }
 
   delete() {
-    ArticleRequest
-      .instance
-      .deleteArticle(this.id)
-      .then(() => this.article = null)
-      .catch(() => alert('Delete Failed!'));
+    this.service.delete();
   }
 
   @computed get article(): Article {
-    return this._article || Article.getEmptyObject();
+    return this.service.article;
   }
 
-  set article(value: Article) {
-    this._article = value;
-  }
-
-  @computed get isDeleted() {
-    return this._article === null;
+  @computed get isDeleted(): boolean {
+    return this.article === null;
   }
 }
+
+ArticleVM.instance = new ArticleVM();
