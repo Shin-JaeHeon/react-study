@@ -17,7 +17,6 @@ export default class TextInput extends React.Component<Props> {
     type: 'text',
     name: '',
   };
-
   render() {
     return (<input
         name={this.props.name}

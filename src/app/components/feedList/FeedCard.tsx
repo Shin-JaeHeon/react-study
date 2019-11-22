@@ -16,7 +16,7 @@ class FeedCard extends React.Component<Props> {
   updateLike = () => this.props.handler(this.props.i);
 
   render() {
-    const {id, username, userImage, date, favoritesCount, title, article, tags, isFavorite} = this.props.article;
+    const {id, username, userImage, date, favoritesCount, title, description, tags, isFavorite} = this.props.article;
     return (
       <div className={style.FeedCard}>
         <div className={style.top}>
@@ -40,7 +40,7 @@ class FeedCard extends React.Component<Props> {
         <Link to={`/article/${id}`}>
           <article>
             <div className={style.title}>{title}</div>
-            <div className={style.text}>{article}</div>
+            <div className={style.text}>{description}</div>
           </article>
           <div className={style.bottom}>
             <div>Read more...</div>

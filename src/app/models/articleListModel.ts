@@ -1,8 +1,9 @@
 import Article from './articleModel';
+import {observable} from 'mobx';
 
 export default class ArticleList {
-  private _list: Array<Article>;
-  private _pages: ReadonlyArray<number>;
+  @observable private _list: Array<Article>;
+  @observable private _pages: ReadonlyArray<number>;
 
   constructor(articles: Array<Object>, count) {
     this._list = articles.map(article => new Article(article));
@@ -16,6 +17,7 @@ export default class ArticleList {
   set pages(value: ReadonlyArray<number>) {
     this._pages = value;
   }
+
   get list(): Array<Article> {
     return this._list || [];
   }

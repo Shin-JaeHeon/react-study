@@ -26,7 +26,6 @@ export default class ArticleListService extends Service {
         break;
     }
   }
-
   async update() {
     const {limit, offset} = this;
     switch (this.type) {
@@ -66,13 +65,13 @@ export default class ArticleListService extends Service {
     return this._selectedPage || 0;
   }
 
+  @computed get query(): string {
+    return this._query;
+  }
+
   set selectedPage(value: number) {
     this._selectedPage = value;
     this.update();
-  }
-
-  @computed get query(): string {
-    return this._query;
   }
 
   set query(value: string) {
@@ -81,7 +80,7 @@ export default class ArticleListService extends Service {
     this.update();
   }
 
-  get articleList(): ArticleList {
+  @computed get articleList(): ArticleList {
     return this._articleList;
   }
 
