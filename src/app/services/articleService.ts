@@ -29,6 +29,7 @@ export default class ArticleService extends Service {
   update(id: string, article: DraftFeed) {
     this.request.update(id, article).then(this.finish);
   }
+
   publish(article: DraftFeed) {
     this.request.publish(article).then(this.finish);
   }
