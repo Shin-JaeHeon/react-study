@@ -13,16 +13,13 @@ export default class Settings extends React.Component {
   readonly changed = name => event => this.vm[name] = event.target.value;
   readonly handler = () => this.vm.update();
 
-  readonly handleChange = (inputType: string, value: string) => {
-
-  };
-
   componentDidMount() {
     if (UserService.instance.isLogin) this.vm.initialize();
   }
 
   render() {
     const {changed} = this;
+    const {image, username, bio, email, password} = this.vm;
     if (!UserService.instance.isLogin) {
       return <Redirect to="/login"/>;
     }
@@ -32,22 +29,22 @@ export default class Settings extends React.Component {
           <h1>Your Settings</h1>
           <TextInput placeholder="URL of Picture"
                      onChange={changed} name="image"
-                     value={this.vm.image}/>
+                     value={image}/>
           <TextInput placeholder="username"
                      onChange={changed} name="username"
-                     value={this.vm.username}/>
+                     value={username}/>
           <textarea className={style.customTextArea}
                     placeholder="Short bio about you"
                     onChange={changed} name="bio"
-                    value={this.vm.bio}/>
+                    value={bio}/>
           <TextInput placeholder="Email"
                      type="email"
                      onChange={changed} name="email"
-                     value={this.vm.email}/>
+                     value={email}/>
           <TextInput placeholder="New Password"
                      type="password"
                      onChange={changed} name="password"
-                     value={this.vm.password}/>
+                     value={password}/>
           <Button handler={this.handler}>Update Settings</Button>
         </div>
       </div>
