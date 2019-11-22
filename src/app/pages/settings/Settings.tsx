@@ -22,6 +22,7 @@ export default class Settings extends React.Component {
   }
 
   render() {
+    const {changed} = this;
     if (!UserService.instance.isLogin) {
       return <Redirect to="/login"/>;
     }
@@ -30,22 +31,22 @@ export default class Settings extends React.Component {
         <div className={style.customForm}>
           <h1>Your Settings</h1>
           <TextInput placeholder="URL of Picture"
-                     onChange={this.changed('image')}
+                     onChange={changed} name="image"
                      value={this.vm.image}/>
           <TextInput placeholder="username"
-                     onChange={this.changed('username')}
+                     onChange={changed} name="username"
                      value={this.vm.username}/>
           <textarea className={style.customTextArea}
                     placeholder="Short bio about you"
-                    onChange={this.changed('bio')}
+                    onChange={changed} name="bio"
                     value={this.vm.bio}/>
           <TextInput placeholder="Email"
                      type="email"
-                     onChange={this.changed('email')}
+                     onChange={changed} name="email"
                      value={this.vm.email}/>
           <TextInput placeholder="New Password"
                      type="password"
-                     onChange={this.changed('password')}
+                     onChange={changed} name="password"
                      value={this.vm.password}/>
           <Button handler={this.handler}>Update Settings</Button>
         </div>
