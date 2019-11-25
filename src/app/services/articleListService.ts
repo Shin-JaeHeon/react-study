@@ -31,17 +31,17 @@ export default class ArticleListService extends Service {
         const {limit, offset} = this;
         switch (this.type) {
             case ArticleListServiceType.Author:
-                await this.loadInternal({author: this.query, limit, offset});
+                await this.load({author: this.query, limit, offset});
                 break;
             case ArticleListServiceType.Tag:
-                await this.loadInternal({tag: this.query, limit, offset});
+                await this.load({tag: this.query, limit, offset});
                 break;
             case ArticleListServiceType.Like:
-                await this.loadInternal({favorited: this.query, limit, offset});
-                await this.loadInternal({favorited: this.query, limit, offset});
+                await this.load({favorited: this.query, limit, offset});
+                await this.load({favorited: this.query, limit, offset});
                 break;
             case ArticleListServiceType.FEED:
-                await this.loadInternal({limit, offset});
+                await this.load({limit, offset});
                 break;
         }
     }
@@ -89,8 +89,8 @@ export default class ArticleListService extends Service {
         this._articleList = value;
     }
 
-    private async loadInternal(param) {
-        const result = await this.request.loadArticlesExternal(param);
+    private async load(param) {
+        const result = await this.request.loadArticles(param);
         this.articleList = new ArticleList(result.articles, result.articlesCount, this.limit);
     }
 

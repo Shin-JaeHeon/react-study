@@ -21,7 +21,7 @@ export default class ArticleRequest extends HttpClient {
         await this.axios.delete('/' + id);
     }
 
-    async loadArticlesExternal(params: Object): Promise<LoadArticlesResult> {
+    async loadArticles(params: Object): Promise<LoadArticlesResult> {
         return (await this.axios.get('', {params})).data;
     }
 
