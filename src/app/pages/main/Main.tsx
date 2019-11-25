@@ -1,11 +1,11 @@
 import * as style from "./main.less";
 import React from "react";
-import PageList from "../../components/pageList/PageList";
+import PageList from "../../gadgets/pageList/PageList";
 import {observer} from "mobx-react";
-import FeedList from "../../components/feedList/FeedList";
+import FeedList from "../../gadgets/feedList/FeedList";
 import MainVM from "./mainVM";
-import TopUI from "../../components/topUI/TopUI";
-import TagListItem from '../../components/tagList/tagListItem';
+import TopUI from "../../gadgets/topUI/TopUI";
+import TagListItem from '../../gadgets/tagList/tagListItem';
 
 @observer
 export default class Main extends React.Component {

@@ -4,7 +4,7 @@ import {observer} from 'mobx-react';
 import TextInput from "../../widgets/input/text-input";
 import Button from "../../widgets/input/button";
 import {Redirect} from 'react-router-dom';
-import TagList from "../../components/editTagList/tagList";
+import TagList from "../../gadgets/editTagList/tagList";
 import CreatorVM from "./creatorVM";
 import {inputChanged} from '../../libs/lib';
 

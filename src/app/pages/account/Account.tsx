@@ -2,9 +2,9 @@ import * as style from "./account.less";
 import React from "react";
 import {observer} from "mobx-react";
 import AccountVM from "./accountVM";
-import FeedList from "../../components/feedList/FeedList";
-import TopUI from "../../components/topUI/TopUI";
-import PageList from "../../components/pageList/PageList";
+import FeedList from "../../gadgets/feedList/FeedList";
+import TopUI from "../../gadgets/topUI/TopUI";
+import PageList from "../../gadgets/pageList/PageList";
 
 interface Props {
     match: {
