@@ -47,7 +47,7 @@ export default class MainVM extends VM<ArticleListService> {
     set clickedTag(value: string) {
         this.tagClicked = value;
         this.topPage = 1;
-        this.service.query = value;
+        this.service.setQuery(value);
     }
 
     set topPage(value: number) {

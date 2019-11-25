@@ -36,7 +36,7 @@ export default class ArticleListService extends Service {
         this.load();
     }
 
-    set query(value: string) {
+    setQuery(value: string) {
         this.info.query = value;
         this.info.selectedPage = 0;
         this.load();

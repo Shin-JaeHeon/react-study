@@ -25,7 +25,7 @@ export default class AccountVM extends VM<ArticleListService> {
         AccountRequest.instance
             .getUserInfo(this.username)
             .then(userData => this.userData = userData);
-        this.allService.forEach(service => service.query = this.username);
+        this.allService.forEach(service => service.setQuery(this.username));
     }
 
     @computed get articleList(): Array<Article> {
