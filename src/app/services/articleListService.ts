@@ -29,19 +29,20 @@ export default class ArticleListService extends Service {
 
     async update() {
         const {limit, offset} = this;
+        const limitOffset = {limit, offset};
         switch (this.type) {
             case ArticleListServiceType.Author:
-                await this.load({author: this.query, limit, offset});
+                await this.load({author: this.query, ...limitOffset});
                 break;
             case ArticleListServiceType.Tag:
-                await this.load({tag: this.query, limit, offset});
+                await this.load({tag: this.query, ...limitOffset});
                 break;
             case ArticleListServiceType.Like:
-                await this.load({favorited: this.query, limit, offset});
-                await this.load({favorited: this.query, limit, offset});
+                await this.load({favorited: this.query, ...limitOffset});
+                await this.load({favorited: this.query, ...limitOffset});
                 break;
             case ArticleListServiceType.FEED:
-                await this.load({limit, offset});
+                await this.load(limitOffset);
                 break;
         }
     }
