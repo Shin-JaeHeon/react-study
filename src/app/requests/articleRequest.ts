@@ -2,7 +2,7 @@ import {ArticleVO} from "../models/articleModel";
 import HttpClient from "../libs/httpClient";
 import {LoadArticlesRQ} from './rq/loadArticlesRQ';
 
-interface LoadArticlesResult {
+export interface LoadArticlesResult {
     articles: Array<ArticleVO>;
     articlesCount: number;
 }

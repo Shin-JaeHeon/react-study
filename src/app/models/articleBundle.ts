@@ -1,16 +1,17 @@
 import {observable} from 'mobx';
-import Article, {ArticleVO} from './articleModel';
+import Article from './articleModel';
+import {LoadArticlesResult} from '../requests/articleRequest';
 
 
 export default class ArticleBundle {
     @observable list: Array<Article> = [];
     @observable pages: ReadonlyArray<number> = [];
 
-    constructor(articles?: ReadonlyArray<ArticleVO>, count?: number, split?: number) {
-        if(articles) {
-            const page = Math.ceil(count / split);
+    constructor(rawBundle: LoadArticlesResult, split?: number) {
+        if (rawBundle) {
+            const page = Math.ceil(rawBundle.articlesCount / split);
             this.pages = new Array(page).fill(0).map((_, i) => i);
-            this.list = articles.map(article => new Article(article));
+            this.list = rawBundle.articles.map(article => new Article(article));
         }
     }
 }

@@ -42,10 +42,11 @@ export default class ArticleListService extends Service {
         this.load();
     }
 
-    async load() {
+    load() {
         const param = this.info.rqParam;
-        const result = await request.loadArticles(param);
-        this.articleList = new ArticleBundle(result.articles, result.articlesCount, this.info.limit);
+        request
+            .loadArticles(param)
+            .then(result => this.articleList = new ArticleBundle(result.articles, result.articlesCount, this.info.limit));
     }
 
     updateLike(i: number) {
