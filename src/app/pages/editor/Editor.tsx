@@ -6,6 +6,7 @@ import Button from "../../widgets/input/button";
 import {Redirect} from 'react-router-dom';
 import TagList from "../../components/editTagList/tagList";
 import EditorVM from "./editorVM";
+import {inputChanged} from '../../libs/lib';
 
 interface Props {
     match: any;
@@ -15,7 +16,7 @@ interface Props {
 export default class Editor extends React.Component<Props> {
     readonly vm = EditorVM.instance;
     readonly handler = () => this.vm.update();
-    readonly changed = event => this.vm[event.target.name] = event.target.value;
+    readonly changed = inputChanged(this.vm);
     readonly tagRemoved = i => () => this.vm.removeTag(i);
     readonly entered = event => {
         if (event.key === 'Enter') {

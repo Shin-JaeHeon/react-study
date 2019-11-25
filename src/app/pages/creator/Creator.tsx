@@ -6,12 +6,13 @@ import Button from "../../widgets/input/button";
 import {Redirect} from 'react-router-dom';
 import TagList from "../../components/editTagList/tagList";
 import CreatorVM from "./creatorVM";
+import {inputChanged} from '../../libs/lib';
 
 @observer
 export default class Creator extends React.Component {
 	readonly vm = CreatorVM.instance;
 	readonly handler = () => this.vm.publish();
-	readonly changed = event => this.vm[event.target.name] = event.target.value;
+	readonly changed = inputChanged(this.vm);
 	readonly tagRemoved = i => () => this.vm.removeTag(i);
 	readonly entered = event => {
 		if (event.key === 'Enter') {
