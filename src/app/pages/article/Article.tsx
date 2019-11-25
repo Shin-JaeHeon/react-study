@@ -46,6 +46,7 @@ export default class Article extends React.Component<Props> {
             </div>
           </div>
         </div>
+
         <div className={style.article}>
           <div className={style.inner}>
             <article>{article.body}</article>

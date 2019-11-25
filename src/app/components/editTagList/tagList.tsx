@@ -4,27 +4,21 @@ import TagListItem from "./tagListItem";
 import * as style from './tagList.less';
 
 interface Props {
-  vm: {
-    tagList
-  };
-  tagList: ReadonlyArray<string>;
+    tagList: Array<string>;
+    handler: (i) => (event) => void;
 }
 
 
 @observer
 export default class TagList extends React.Component<Props> {
-  handler = i => () => {
-    this.props.vm.tagList =
-      this.props.vm.tagList.reduce((prev, now, index) => index !== i ? [...prev, now] : prev, []);
-  };
-
-  render() {
-    return (
-      <div className={style.tags}>
-        {this.props.tagList.map((tag, i) => (
-          <TagListItem tag={tag} key={i} handler={this.handler(i)}/>
-        ))}
-      </div>
-    );
-  }
+    render() {
+        const { tagList, handler} = this.props;
+        return (
+            <div className={style.tags}>
+                {tagList.map((tag, i) => (
+                    <TagListItem tag={tag} key={i} handler={handler(i)}/>
+                ))}
+            </div>
+        );
+    }
 }

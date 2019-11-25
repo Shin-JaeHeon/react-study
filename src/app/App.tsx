@@ -10,7 +10,9 @@ import Creator from "./pages/creator/Creator";
 import Editor from "./pages/editor/Editor";
 import Settings from "./pages/settings/Settings";
 import Account from "./pages/account/Account";
+import {observer} from 'mobx-react';
 
+@observer
 export default class App extends React.Component {
   render() {
     return (

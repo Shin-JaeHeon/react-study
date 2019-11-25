@@ -1,122 +1,60 @@
+import {observable, computed} from "mobx";
+import {popItem} from '../libs/lib';
+
+export interface ArticleAuthorVO {
+    username: string;
+    image: string;
+}
+
+export interface ArticleVO {
+    author: ArticleAuthorVO,
+    slug: string;
+    createdAt: string;
+    title: string;
+    description: string;
+    body: string;
+    favorited: boolean;
+    favoritesCount: number;
+    tagList: Array<string>;
+}
+
 export default class Article {
-  private _username: string;
-  private _userImage: string;
-  private _id: string;
-  private _date: string;
-  private _title: string;
-  private _description: string;
-  private _body: string;
-  private _isFavorite: boolean;
-  private _favoritesCount: number;
-  private _tagList: Array<string>;
+    username: string = '';
+    userImage: string = '';
+    id: string = '';
+    date: string = '';
+    title: string = '';
+    description: string = '';
+    body: string = '';
+    isFavorite: boolean = false;
+    favoritesCount: number = 0;
+    @observable private tags: Array<string> = [];
 
-  static getEmptyObject(): Article {
-    return new Article({
-      author: {
-        username: '',
-        userImage: '',
-      },
-      id: '',
-      date: '',
-      title: '',
-      description: '',
-      body: '',
-      isFavorite: false,
-      favoritesCount: 0,
-      tagList: []
-    });
-  }
+    constructor(rawData?: ArticleVO) {
+        if (rawData) {
+            this.username = rawData.author.username;
+            this.userImage = rawData.author.image;
+            this.id = rawData.slug;
+            this.date = rawData.createdAt;
+            this.title = rawData.title;
+            this.description = rawData.description;
+            this.body = rawData.body;
+            this.isFavorite = rawData.favorited;
+            this.favoritesCount = rawData.favoritesCount;
+            this.tags = rawData.tagList;
+        }
+    }
 
-  constructor(rawData) {
-    this._username = rawData.author.username;
-    this._userImage = rawData.author.image;
-    this._id = rawData.slug;
-    this._date = rawData.createdAt;
-    this._title = rawData.title;
-    this._description = rawData.description;
-    this._body = rawData.body;
-    this._isFavorite = rawData.favorited;
-    this._favoritesCount = rawData.favoritesCount;
-    this._tagList = rawData.tagList;
-  }
+    addTag(value: string) {
+        const tag = value.trim();
+        if (!this.tags.includes(tag) && tag) this.tags.push(tag);
+    }
 
-  get username(): string {
-    return this._username;
-  }
+    @computed get tagList(): Array<string> {
+        return this.tags || [];
+    }
 
-  set username(value: string) {
-    this._username = value;
-  }
-
-  get userImage(): string {
-    return this._userImage;
-  }
-
-  set userImage(value: string) {
-    this._userImage = value;
-  }
-
-  get id(): string {
-    return this._id;
-  }
-
-  set id(value: string) {
-    this._id = value;
-  }
-
-  get date(): string {
-    return this._date;
-  }
-
-  set date(value: string) {
-    this._date = value;
-  }
-
-  get title(): string {
-    return this._title;
-  }
-
-  set title(value: string) {
-    this._title = value;
-  }
-
-  get description(): string {
-    return this._description;
-  }
-
-  set description(value: string) {
-    this._description = value;
-  }
-
-  get body(): string {
-    return this._body;
-  }
-
-  set body(value: string) {
-    this._body = value;
-  }
-
-  get isFavorite(): boolean {
-    return this._isFavorite;
-  }
-
-  set isFavorite(value: boolean) {
-    this._isFavorite = value;
-  }
-
-  get favoritesCount(): number {
-    return this._favoritesCount;
-  }
-
-  set favoritesCount(value: number) {
-    this._favoritesCount = value;
-  }
-
-  get tagList(): Array<string> {
-    return this._tagList;
-  }
-
-  set tagList(value: Array<string>) {
-    this._tagList = value;
-  }
+    removeTag(index: number) {
+        this.tags = popItem(this.tags, index);
+    }
 }

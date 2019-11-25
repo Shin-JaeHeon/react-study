@@ -1,8 +1,8 @@
-import Article from "../models/articleModel";
+import {ArticleVO} from "../models/articleModel";
 import HttpClient from "../libs/httpClient";
 
 interface LoadArticlesResult {
-  articles: Array<Object>;
+  articles: Array<ArticleVO>;
   articlesCount: number;
 }
 
@@ -13,7 +13,7 @@ export default class ArticleRequest extends HttpClient {
     super('articles');
   }
 
-  async loadArticle(id: string): Promise<Article> {
+  async loadArticle(id: string): Promise<ArticleVO> {
     return (await this.axios.get('/' + id)).data.article;
   }
 
@@ -25,19 +25,19 @@ export default class ArticleRequest extends HttpClient {
     return (await this.axios.get('', {params})).data;
   }
 
-  async update(id: string, article): Promise<Article> {
+  async update(id: string, article): Promise<ArticleVO> {
     return (await this.axios.put('/' + id, {article})).data.article;
   }
 
-  async publish(article): Promise<Article> {
+  async publish(article): Promise<ArticleVO> {
     return (await this.axios.post('', {article})).data.article;
   }
 
-  async setLike(id: string): Promise<Article> {
+  async setLike(id: string): Promise<ArticleVO> {
     return (await this.axios.post(`/${id}/favorite`)).data.article;
   }
 
-  async removeLike(id: string): Promise<Article> {
+  async removeLike(id: string): Promise<ArticleVO> {
     return (await this.axios.delete(`/${id}/favorite`)).data.article;
   }
 }

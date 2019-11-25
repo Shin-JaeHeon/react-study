@@ -8,46 +8,48 @@ import TagList from "../../components/editTagList/tagList";
 import EditorVM from "./editorVM";
 
 interface Props {
-  match: any;
+    match: any;
 }
 
 @observer
 export default class Editor extends React.Component<Props> {
-  readonly vm = EditorVM.instance;
-  readonly handler = () => this.vm.update();
-  readonly changed = event => this.vm[event.target.name] = event.target.value;
-  readonly entered = event => {
-    if (event.key === 'Enter') {
-      this.vm.addTag(event.target.value);
-      event.target.value = '';
-    }
-  };
+    readonly vm = EditorVM.instance;
+    readonly handler = () => this.vm.update();
+    readonly changed = event => this.vm[event.target.name] = event.target.value;
+    readonly tagRemoved = i => () => this.vm.removeTag(i);
+    readonly entered = event => {
+        if (event.key === 'Enter') {
+            this.vm.addTag(event.target.value);
+            event.target.value = '';
+        }
+    };
 
-  componentDidMount() {
-    this.vm.clearRedirectID();
-    this.vm.load(this.props.match.params.id);
-  }
-
-  render() {
-    const {changed} = this;
-    if (this.vm.redirectID !== '') {
-      return <Redirect to={`/article/${this.vm.redirectID}`}/>
+    componentDidMount() {
+        this.vm.clearRedirectID();
+        this.vm.load(this.props.match.params.id);
     }
-    return (
-      <div className={style.editorContainer}>
-        <div className={style.customForm}>
-          <TextInput placeholder="Title" onChange={changed} name="title" value={this.vm.title}/>
-          <TextInput placeholder="What's this article about?" onChange={changed} name="description"
-                     value={this.vm.description}/>
-          <textarea className={style.customTextArea} placeholder="Write your article (in markdown)"
-                    onChange={changed} name="body" value={this.vm.body}/>
-          <TextInput placeholder="Enter tags" onKeyDown={this.entered}/>
-          <div className={style.tagsContainer}>
-            <TagList tagList={this.vm.tagList} vm={this.vm}/>
-          </div>
-          <Button handler={this.handler}>Publish Article</Button>
-        </div>
-      </div>
-    )
-  }
+
+    render() {
+        const {changed, tagRemoved, handler} = this;
+        const {description, tagList, title, body} = this.vm;
+        if (this.vm.redirectID !== '') {
+            return <Redirect to={`/article/${this.vm.redirectID}`}/>
+        }
+        return (
+            <div className={style.editorContainer}>
+                <div className={style.customForm}>
+                    <TextInput placeholder="Title" onChange={changed} name="title" value={title}/>
+                    <TextInput placeholder="What's this article about?" onChange={changed} name="description"
+                               value={description}/>
+                    <textarea className={style.customTextArea} placeholder="Write your article (in markdown)"
+                              onChange={changed} name="body" value={body}/>
+                    <TextInput placeholder="Enter tags" onKeyDown={this.entered}/>
+                    <div className={style.tagsContainer}>
+                        <TagList tagList={tagList} handler={tagRemoved}/>
+                    </div>
+                    <Button handler={handler}>Publish Article</Button>
+                </div>
+            </div>
+        )
+    }
 }

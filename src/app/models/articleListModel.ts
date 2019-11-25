@@ -1,28 +1,16 @@
-import Article from './articleModel';
 import {observable} from 'mobx';
+import Article, {ArticleVO} from './articleModel';
+
+const ARTICLE_PER_PAGE = 5;
 
 export default class ArticleList {
-  @observable private _list: Array<Article>;
-  @observable private _pages: ReadonlyArray<number>;
+	@observable list: Array<Article> = [];
+	@observable pages: ReadonlyArray<number> = [];
 
-  constructor(articles: Array<Object>, count) {
-    this._list = articles.map(article => new Article(article));
-    this._pages = [...new Array(~~(count / 5) + ((count % 5) ? 1 : 0))].map((_, i) => i);
-  }
+	constructor(articles: ReadonlyArray<ArticleVO>, count: number) {
+		const page = Math.ceil(count / ARTICLE_PER_PAGE);
 
-  get pages(): ReadonlyArray<number> {
-    return this._pages || [];
-  }
-
-  set pages(value: ReadonlyArray<number>) {
-    this._pages = value;
-  }
-
-  get list(): Array<Article> {
-    return this._list || [];
-  }
-
-  set list(value: Array<Article>) {
-    this._list = value;
-  }
+		this.pages = new Array(page).fill(0).map((_, i) => i);
+		this.list = articles.map(article => new Article(article));
+	}
 }

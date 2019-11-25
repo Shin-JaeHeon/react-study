@@ -11,6 +11,7 @@ export default class ArticleService extends Service {
   constructor() {
     super();
     this.request = ArticleRequest.instance;
+    this._article = new Article();
   }
 
   load(id: string) {
@@ -19,7 +20,7 @@ export default class ArticleService extends Service {
   }
 
   @computed get article(): Article {
-    return this._article || Article.getEmptyObject();
+    return this._article;
   }
 
   set article(value: Article) {

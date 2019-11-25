@@ -4,7 +4,7 @@ import * as style from './tagList.less';
 
 interface Props {
   tag: string;
-  handler: () => void;
+  handler: (event) => void;
 }
 
 @observer
