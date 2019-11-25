@@ -22,13 +22,15 @@ export default class Account extends React.Component<Props> {
     pageClicked = (page: number) => this.vm.selectedPage = page;
     likeClicked = (i: number) => this.vm.updateLike(i);
 
+    username = this.props.match.params.username;
+
     componentDidMount() {
-        this.vm.username = this.props.match.params.username;
+        this.vm.username = this.username;
     }
 
     componentDidUpdate() {
-        if (this.vm.username !== this.props.match.params.username) {
-            this.vm.username = this.props.match.params.username;
+        if (this.vm.username !== this.username) {
+            this.vm.username = this.username;
         }
     }
 
