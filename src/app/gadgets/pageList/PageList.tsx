@@ -14,11 +14,13 @@ export default class PageList extends React.Component<Props> {
     render() {
         const {pageList, handler} = this.props;
         return (
-            <div className={style.list}>
-                {pageList.map(page =>
-                    <PageListItem page={page} key={page} handler={handler}/>
-                )}
-            </div>
+            <footer>
+                <div className={style.list}>
+                    {pageList.map(page =>
+                        <PageListItem page={page} key={page} handler={handler}/>
+                    )}
+                </div>
+            </footer>
         );
     }
 }

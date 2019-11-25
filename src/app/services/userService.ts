@@ -1,6 +1,6 @@
 import Service from '../libs/Service';
 import UserRequest from '../requests/userRequest';
-import {observable, computed} from 'mobx';
+import {computed, observable} from 'mobx';
 import User from '../models/userModel';
 
 export default class UserService extends Service {

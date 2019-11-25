@@ -6,66 +6,66 @@ import TagService from '../../services/tagService';
 
 
 export default class MainVM extends VM<ArticleListService> {
-  static instance: MainVM;
-  @observable tagClicked: string;
-  @observable private _popularTagList: ReadonlyArray<string> = [];
+    static instance: MainVM;
+    @observable tagClicked: string;
+    @observable private _popularTagList: ReadonlyArray<string> = [];
 
-  constructor() {
-    super(
-      new ArticleListService(ArticleListServiceType.FEED),
-      new ArticleListService(ArticleListServiceType.Tag)
-    );
-  }
+    constructor() {
+        super(
+            new ArticleListService(ArticleListServiceType.FEED),
+            new ArticleListService(ArticleListServiceType.Tag)
+        );
+    }
 
-  init() {
-    this.service.update();
-  }
+    init() {
+        this.service.update();
+    }
 
-  @computed get articleList() {
-    return this.service.list;
-  }
+    @computed get articleList() {
+        return this.service.list;
+    }
 
-  @computed get pageList() {
-    return this.service.pages;
-  }
+    @computed get pageList() {
+        return this.service.pages;
+    }
 
-  @computed get page(): number {
-    return this.service.selectedPage;
-  }
+    @computed get page(): number {
+        return this.service.selectedPage;
+    }
 
-  @computed get topPage(): number {
-    return this.serviceSeparator;
-  }
+    @computed get topPage(): number {
+        return this.serviceSeparator;
+    }
 
-  @computed get clickedTag(): string {
-    return this.tagClicked;
-  }
+    @computed get clickedTag(): string {
+        return this.tagClicked;
+    }
 
-  set clickedTag(value: string) {
-    this.tagClicked = value;
-    this.topPage = 1;
-    this.service.query = value;
-  }
+    set clickedTag(value: string) {
+        this.tagClicked = value;
+        this.topPage = 1;
+        this.service.query = value;
+    }
 
-  set topPage(value: number) {
-    this.serviceSeparator = value;
-  }
+    set topPage(value: number) {
+        this.serviceSeparator = value;
+    }
 
-  set page(value: number) {
-    this.service.selectedPage = value;
-  }
+    set page(value: number) {
+        this.service.selectedPage = value;
+    }
 
-  @computed get popularTagList(): ReadonlyArray<string> {
-    return TagService.tags || [];
-  }
+    @computed get popularTagList(): ReadonlyArray<string> {
+        return TagService.tags || [];
+    }
 
-  updateLike(i: number) {
-    this.service.updateLike(i);
-  }
+    updateLike(i: number) {
+        this.service.updateLike(i);
+    }
 
-  @computed get topPageList() {
-    return ['Global Feed', this.clickedTag ? '# ' + this.clickedTag : ''];
-  }
+    @computed get topPageList() {
+        return ['Global Feed', this.clickedTag ? '# ' + this.clickedTag : ''];
+    }
 }
 
 MainVM.instance = new MainVM();

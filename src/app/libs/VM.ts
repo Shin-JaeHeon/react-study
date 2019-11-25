@@ -1,4 +1,4 @@
-import {observable, computed} from 'mobx';
+import {computed, observable} from 'mobx';
 
 export default class VM<T> {
 

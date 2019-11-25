@@ -43,9 +43,7 @@ export default class Main extends React.Component {
                     </div>
                     <PopularTags list={popularTagList} handler={tagClicked}/>
                 </section>
-                <footer>
-                    <PageList pageList={pageList} handler={pageClicked}/>
-                </footer>
+                <PageList pageList={pageList} handler={pageClicked}/>
             </main>
         );
     }

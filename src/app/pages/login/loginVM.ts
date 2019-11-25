@@ -1,4 +1,4 @@
-import {observable, computed} from "mobx";
+import {computed, observable} from "mobx";
 import HttpClient from "../../libs/httpClient";
 import UserService from '../../services/userService';
 

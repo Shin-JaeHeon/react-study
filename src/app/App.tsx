@@ -1,6 +1,6 @@
 import React from 'react';
 import './app.less';
-import {Switch, Route, HashRouter} from 'react-router-dom';
+import {HashRouter, Route, Switch} from 'react-router-dom';
 import Main from './pages/main/Main';
 import TopNavigation from "./TopNavigation";
 import Login from "./pages/login/Login";
