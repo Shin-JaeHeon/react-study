@@ -12,7 +12,7 @@ interface Props {
 export default class TagList extends React.Component<Props> {
     render() {
         return (
-            <div className={style.tags}>
+            <div className={style.tags} data-length={this.props.tagList.length}>
                 {this.props.tagList.map((tag, i) => (
                     <TagListItem tag={tag} key={i}/>
                 ))}

@@ -35,15 +35,12 @@ export default class Main extends React.Component {
                 </div>
                 <section>
                     <div className={style.feedContainer}>
-                        <TopUI topPageList={topPageList}
-                               selectedPage={topPage}
-                               handler={topPageClicked}
-                        />
+                        <TopUI topPageList={topPageList} selectedPage={topPage} handler={topPageClicked}/>
                         <FeedList articleList={articleList} handler={likeClicked}/>
                     </div>
                     <PopularTags list={popularTagList} handler={tagClicked}/>
+                    <PageList pageList={pageList} handler={pageClicked}/>
                 </section>
-                <PageList pageList={pageList} handler={pageClicked}/>
             </main>
         );
     }

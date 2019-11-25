@@ -13,7 +13,7 @@ export default class TagList extends React.Component<Props> {
     render() {
         const {tagList, handler} = this.props;
         return (
-            <div className={style.tags}>
+            <div className={style.tags} data-length={tagList.length}>
                 {tagList.map((tag, i) => (
                     <TagListItem tag={tag} key={i} handler={handler(i)}/>
                 ))}
