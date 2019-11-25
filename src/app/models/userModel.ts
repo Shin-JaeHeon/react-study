@@ -1,5 +1,3 @@
-import {computed} from "mobx";
-
 export interface UserVO {
 	id: number;
 	email: string;

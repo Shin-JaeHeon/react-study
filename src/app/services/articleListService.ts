@@ -1,7 +1,7 @@
 import ArticleRequest from '../requests/articleRequest';
 import ArticleListServiceType from './enums/ArticleListServiceType';
 import ArticleList from '../models/articleListModel';
-import {computed, observable, action} from 'mobx';
+import {computed, observable} from 'mobx';
 import Article from '../models/articleModel';
 import Service from '../libs/Service';
 

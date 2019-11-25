@@ -4,33 +4,33 @@ import UserService from '../../services/userService';
 
 export default class LoginVM {
 
-  static instance = new LoginVM();
-  @observable private _email: string = '';
-  @observable private _pw: string = '';
+    static instance = new LoginVM();
+    @observable private _email: string = '';
+    @observable private _pw: string = '';
 
-  @computed get email(): string {
-    return this._email;
-  }
+    @computed get email(): string {
+        return this._email;
+    }
 
-  set email(value: string) {
-    this._email = value;
-  }
+    set email(value: string) {
+        this._email = value;
+    }
 
-  @computed get pw(): string {
-    return this._pw;
-  }
+    @computed get pw(): string {
+        return this._pw;
+    }
 
-  set pw(value: string) {
-    this._pw = value;
-  }
+    set pw(value: string) {
+        this._pw = value;
+    }
 
-  login() {
-    UserService.instance
-      .action('login', this.email, this.pw)
-      .then(user => HttpClient.updateHeaderByLogin(user.token));
-  }
+    login() {
+        UserService.instance
+            .action('login', this.email, this.pw)
+            .then(user => HttpClient.updateHeaderByLogin(user.token));
+    }
 
-  @computed get isLogin(): boolean {
-    return UserService.instance.isLogin;
-  }
+    @computed get isLogin(): boolean {
+        return UserService.instance.isLogin;
+    }
 }

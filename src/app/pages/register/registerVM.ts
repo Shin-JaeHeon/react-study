@@ -1,6 +1,5 @@
 import {observable, computed} from "mobx";
 import UserService from '../../services/userService';
-import HttpClient from '../../libs/httpClient';
 
 export default class RegisterVM {
 
