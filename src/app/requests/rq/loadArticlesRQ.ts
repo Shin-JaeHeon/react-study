@@ -1,5 +1,3 @@
-import ArticleListServiceType from '../../services/enums/ArticleListServiceType';
-
 interface BaseRQ {
     limit: number;
     offset: number;
