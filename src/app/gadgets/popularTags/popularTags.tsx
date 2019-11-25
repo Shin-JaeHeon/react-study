@@ -10,7 +10,6 @@ interface Props {
 
 @observer
 export default class PopularTags extends React.Component<Props> {
-
     render() {
         const {handler, list} = this.props;
         return (
