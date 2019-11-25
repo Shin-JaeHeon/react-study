@@ -7,10 +7,10 @@ import Service from '../libs/Service';
 
 export default class ArticleListService extends Service {
     readonly request: ArticleRequest;
-    @observable private _query: string;
+    @observable private _query: string = '';
     @observable private _articleList: ArticleList;
-    @observable private _selectedPage: number;
-    @observable private readonly limit: number;
+    @observable private _selectedPage: number = 0;
+    @observable private readonly limit: number = 0;
 
     constructor(private readonly type: ArticleListServiceType) {
         super();
