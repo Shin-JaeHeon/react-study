@@ -12,7 +12,7 @@ export default class MainVM extends VM<ArticleListService> {
     constructor() {
         super(
             new ArticleListService(ArticleListServiceType.FEED),
-            new ArticleListService(ArticleListServiceType.Tag)
+            new ArticleListService(ArticleListServiceType.TAG)
         );
     }
 
@@ -21,7 +21,7 @@ export default class MainVM extends VM<ArticleListService> {
     }
 
     init() {
-        this.service.update();
+        this.service.load();
     }
 
     @computed get articleList() {
@@ -55,7 +55,7 @@ export default class MainVM extends VM<ArticleListService> {
     }
 
     set page(value: number) {
-        this.service.selectedPage = value;
+        this.service.selectPage(value);
     }
 
     updateLike(i: number) {

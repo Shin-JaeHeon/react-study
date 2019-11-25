@@ -37,8 +37,7 @@ export default class Article extends React.Component<Props> {
                     <div className={style.inner}>
                         <h1>{article.title}</h1>
                         <div className={style.profile}>
-                            <Profile username={article.username} date={article.date}
-                                     image={article.userImage}/>
+                            <Profile username={article.username} date={article.date} image={article.userImage}/>
                             <Link to={`/editor/${article.id}`}>
                                 <button className={style.editorButton}>Edit Article</button>
                             </Link>

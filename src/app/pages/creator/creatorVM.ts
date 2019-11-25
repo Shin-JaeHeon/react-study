@@ -7,6 +7,8 @@ export default class CreatorVM extends VM<ArticleService> {
     static instance: CreatorVM;
     @observable redirectID: string;
 
+    @observable currentTagValue: string = '';
+
     constructor() {
         super(new ArticleService());
         this.redirectID = '';
@@ -27,8 +29,9 @@ export default class CreatorVM extends VM<ArticleService> {
         return this.service.article;
     }
 
-    addTag(value: string) {
-        this.article.addTag(value);
+    addTag() {
+        this.article.addTag(this.currentTagValue);
+        this.currentTagValue = '';
     }
 
     removeTag(index: number) {

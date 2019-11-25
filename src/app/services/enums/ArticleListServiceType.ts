@@ -1,7 +1,7 @@
 enum ArticleListServiceType {
-    Author,
-    Like,
-    Tag,
+    AUTHOR,
+    LIKE,
+    TAG,
     FEED
 }
 

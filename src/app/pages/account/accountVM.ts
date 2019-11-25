@@ -13,8 +13,8 @@ export default class AccountVM extends VM<ArticleListService> {
     topPageList = ['My Articles', 'Favorited Articles'];
 
     constructor() {
-        super(new ArticleListService(ArticleListServiceType.Author),
-            new ArticleListService(ArticleListServiceType.Like));
+        super(new ArticleListService(ArticleListServiceType.AUTHOR),
+            new ArticleListService(ArticleListServiceType.LIKE));
         this.userData = {
             username: '',
             image: ''
@@ -60,15 +60,15 @@ export default class AccountVM extends VM<ArticleListService> {
         return this.service.selectedPage || 0;
     }
 
-    set selectedPage(value: number) {
-        this.service.selectedPage = value;
+    selectPage(value: number) {
+        this.service.selectPage(value);
     }
 
     get topPage(): number {
         return this.serviceSeparator || 0;
     }
 
-    set topPage(value: number) {
+    selectTopPage(value: number) {
         this.serviceSeparator = value;
     }
 

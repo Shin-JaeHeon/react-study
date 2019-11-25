@@ -2,7 +2,7 @@ import {observable} from 'mobx';
 import Article, {ArticleVO} from './articleModel';
 
 
-export default class ArticleList {
+export default class ArticleBundle {
     @observable list: Array<Article> = [];
     @observable pages: ReadonlyArray<number> = [];
 

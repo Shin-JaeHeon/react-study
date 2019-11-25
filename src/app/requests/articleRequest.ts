@@ -1,5 +1,6 @@
 import {ArticleVO} from "../models/articleModel";
 import HttpClient from "../libs/httpClient";
+import {LoadArticlesRQ} from './rq/loadArticlesRQ';
 
 interface LoadArticlesResult {
     articles: Array<ArticleVO>;
@@ -21,7 +22,7 @@ export default class ArticleRequest extends HttpClient {
         await this.axios.delete('/' + id);
     }
 
-    async loadArticles(params: Object): Promise<LoadArticlesResult> {
+    async loadArticles(params: Readonly<LoadArticlesRQ>): Promise<LoadArticlesResult> {
         return (await this.axios.get('', {params})).data;
     }
 

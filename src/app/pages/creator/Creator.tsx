@@ -13,11 +13,15 @@ export default class Creator extends React.Component {
     readonly vm = CreatorVM.instance;
     readonly handler = () => this.vm.publish();
     readonly changed = inputChanged(this.vm.article);
-    readonly tagRemoved = i => () => this.vm.removeTag(i);
+    readonly changed2 = inputChanged(this.vm);
+
+    readonly tagRemoved = i => () => {
+        this.vm.removeTag(i);
+    };
+
     readonly entered = event => {
         if (event.key === 'Enter') {
-            this.vm.addTag(event.target.value);
-            event.target.value = '';
+            this.vm.addTag();
         }
     };
 
@@ -26,8 +30,8 @@ export default class Creator extends React.Component {
     }
 
     render() {
-        const {changed, handler, tagRemoved} = this;
-        const {redirectID, article} = this.vm;
+        const {changed, changed2, handler, tagRemoved} = this;
+        const {redirectID, article, currentTagValue} = this.vm;
         if (redirectID !== '' && redirectID) {
             return <Redirect to={`article/${redirectID}`}/>
         }
@@ -39,7 +43,8 @@ export default class Creator extends React.Component {
                     <textarea className={style.customTextArea} placeholder="Write your article (in markdown)"
                               name="body"
                               onChange={changed}/>
-                    <TextInput placeholder="Enter tags" onKeyDown={this.entered}/>
+                    <TextInput placeholder="Enter tags" onKeyDown={this.entered} onChange={changed2}
+                               value={currentTagValue} name="currentTagValue"/>
                     <div className={style.tagsContainer}>
                         <TagList tagList={article.tagList} handler={tagRemoved}/>
                     </div>
