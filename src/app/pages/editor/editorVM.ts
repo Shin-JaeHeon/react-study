@@ -25,34 +25,6 @@ export default class EditorVM extends VM<ArticleService> {
             .catch(() => alert(`Update Failed!!`));
     }
 
-    @computed get title(): string {
-        return this.article.title;
-    }
-
-    set title(value: string) {
-        this.article.title = value;
-    }
-
-    @computed get description(): string {
-        return this.article.description;
-    }
-
-    set description(value: string) {
-        this.article.description = value;
-    }
-
-    @computed get body(): string {
-        return this.article.body;
-    }
-
-    set body(value: string) {
-        this.article.body = value;
-    }
-
-    @computed get tagList(): Array<string> {
-        return this.article.tagList;
-    }
-
     addTag(tag: string) {
         this.article.addTag(tag);
     }

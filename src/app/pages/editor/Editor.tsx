@@ -32,7 +32,8 @@ export default class Editor extends React.Component<Props> {
 
     render() {
         const {changed, tagRemoved, handler} = this;
-        const {description, tagList, title, body} = this.vm;
+        const {description, title, body, tagList} = this.vm.article;
+
         if (this.vm.redirectID !== '') {
             return <Redirect to={`/article/${this.vm.redirectID}`}/>
         }

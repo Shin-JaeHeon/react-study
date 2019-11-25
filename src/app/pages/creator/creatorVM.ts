@@ -18,36 +18,13 @@ export default class CreatorVM extends VM<ArticleService> {
             .then(article => this.redirectID = article.slug);
     }
 
+    init() {
+        this.setService(new ArticleService());
+        this.redirectID = '';
+    }
+
     @computed get article(): Article {
         return this.service.article;
-    }
-
-    @computed get title(): string {
-        return this.article.title;
-    }
-
-    set title(value: string) {
-        this.article.title = value;
-    }
-
-    @computed get description(): string {
-        return this.article.description;
-    }
-
-    set description(value: string) {
-        this.article.description = value;
-    }
-
-    @computed get body(): string {
-        return this.article.body;
-    }
-
-    set body(value: string) {
-        this.article.body = value;
-    }
-
-    @computed get tagList() {
-        return this.article.tagList;
     }
 
     addTag(value: string) {
@@ -58,10 +35,6 @@ export default class CreatorVM extends VM<ArticleService> {
         this.article.removeTag(index);
     }
 
-    init() {
-        this.setService(new ArticleService());
-        this.redirectID = '';
-    }
 }
 
 CreatorVM.instance = new CreatorVM();
