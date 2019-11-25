@@ -8,15 +8,14 @@ import VM from '../../libs/VM';
 
 export default class AccountVM extends VM<ArticleListService> {
     static instance = new AccountVM();
-    @observable private _username: string;
-    @observable private _userData: Profile;
-    @observable private _pageList: ReadonlyArray<number>;
+    @observable name: string;
+    @observable profile: Profile;
     topPageList = ['My Articles', 'Favorited Articles'];
 
     constructor() {
         super(new ArticleListService(ArticleListServiceType.Author),
             new ArticleListService(ArticleListServiceType.Like));
-        this._userData = {
+        this.userData = {
             username: '',
             image: ''
         };
@@ -38,23 +37,23 @@ export default class AccountVM extends VM<ArticleListService> {
     }
 
     @computed get userData(): Profile {
-        return this._userData || {
+        return this.profile || {
             username: '',
             image: ''
         };
     }
 
-    get username(): string {
-        return this._username;
+    get username() {
+        return this.name;
     }
 
     set username(value: string) {
-        this._username = value;
+        this.name = value;
         this.init();
     }
 
     set userData(value: Profile) {
-        this._userData = value;
+        this.profile = value;
     }
 
     @computed get selectedPage(): number {

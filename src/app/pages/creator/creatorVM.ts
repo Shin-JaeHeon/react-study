@@ -5,7 +5,7 @@ import Article from '../../models/articleModel';
 
 export default class CreatorVM extends VM<ArticleService> {
     static instance: CreatorVM;
-    @observable private _redirectID: string;
+    @observable redirectID: string;
 
     constructor() {
         super(new ArticleService());
@@ -56,14 +56,6 @@ export default class CreatorVM extends VM<ArticleService> {
 
     removeTag(index: number) {
         this.article.removeTag(index);
-    }
-
-    @computed get redirectID() {
-        return this._redirectID;
-    }
-
-    set redirectID(value: string) {
-        this._redirectID = value;
     }
 
     init() {

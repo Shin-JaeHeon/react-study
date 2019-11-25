@@ -5,12 +5,10 @@ import ArticleService from '../../services/articleService';
 
 export default class EditorVM extends VM<ArticleService> {
     static instance: EditorVM;
-    @observable private _redirectID = '';
-    @observable private _article: Article = null;
+    @observable redirectID = '';
 
     constructor() {
         super(new ArticleService(), null);
-
     }
 
     @computed get article(): Article {
@@ -22,8 +20,7 @@ export default class EditorVM extends VM<ArticleService> {
     }
 
     update() {
-        this.service
-            .update()
+        this.service.update()
             .then(() => this.redirectID = this.article.id)
             .catch(() => alert(`Update Failed!!`));
     }
@@ -62,14 +59,6 @@ export default class EditorVM extends VM<ArticleService> {
 
     removeTag(index: number) {
         this.article.removeTag(index);
-    }
-
-    @computed get redirectID() {
-        return this._redirectID;
-    }
-
-    set redirectID(value: string) {
-        this._redirectID = value;
     }
 
     clearRedirectID() {
