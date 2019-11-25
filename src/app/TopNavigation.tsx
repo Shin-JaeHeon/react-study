@@ -17,20 +17,17 @@ export default class TopNavigation extends React.Component {
                 <div>
                     <ul>
                         <li><Link to="/">Home</Link></li>
-                        {
-                            isLogin ? (
-                                <Fragment>
-                                    <li><Link to="/creator">New Post</Link></li>
-                                    <li><Link to="/settings">Settings</Link></li>
-                                    <li><Link to={`@${user.username}`}><img src={user.image} alt=""/>{user.username}
-                                    </Link></li>
-                                </Fragment>
-                            ) : (
-                                <Fragment>
-                                    <li><Link to="/login">Sign in</Link></li>
-                                    <li>< Link to="/register">Sign up</Link></li>
-                                </Fragment>
-                            )
+                        {isLogin ?
+                            <Fragment>
+                                <li><Link to="/creator">New Post</Link></li>
+                                <li><Link to="/settings">Settings</Link></li>
+                                <li><Link to={`@${user.username}`}><img src={user.image} alt=""/>{user.username}
+                                </Link></li>
+                            </Fragment>
+                            : <Fragment>
+                                <li><Link to="/login">Sign in</Link></li>
+                                <li>< Link to="/register">Sign up</Link></li>
+                            </Fragment>
                         }
                     </ul>
                 </div>
