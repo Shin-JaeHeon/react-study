@@ -2,18 +2,22 @@ import {computed, observable} from "mobx";
 import ArticleListService from '../../services/articleListService';
 import ArticleListServiceType from '../../services/enums/ArticleListServiceType';
 import VM from '../../libs/VM';
+import TagService from '../../services/tagService';
 
 
 export default class MainVM extends VM<ArticleListService> {
     static instance: MainVM;
     @observable tagClicked: string = '';
-    @observable popularTagList: ReadonlyArray<string> = [];
 
     constructor() {
         super(
             new ArticleListService(ArticleListServiceType.FEED),
             new ArticleListService(ArticleListServiceType.Tag)
         );
+    }
+
+    @computed get popularTagList() {
+        return TagService.tags;
     }
 
     init() {

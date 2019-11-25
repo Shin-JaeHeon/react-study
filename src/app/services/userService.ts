@@ -25,3 +25,4 @@ export default class UserService extends Service {
     @computed get isLogin(): boolean {
         return !!this.user;
     }
+}

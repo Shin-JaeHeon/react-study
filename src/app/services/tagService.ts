@@ -5,9 +5,10 @@ import {observable} from 'mobx';
 export default class TagService extends Service {
     readonly request: TagRequest;
     @observable static tags: ReadonlyArray<string> = [];
-    static instance = new TagService();
+    static instance: TagService;
 
     constructor() {
+        TagService.tags = [];
         super();
         this.request = TagRequest.instance;
         TagRequest.instance
@@ -15,3 +16,4 @@ export default class TagService extends Service {
             .then(tags => TagService.tags = tags);
     }
 }
+TagService.instance = new TagService();

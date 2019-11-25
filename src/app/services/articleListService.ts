@@ -8,12 +8,13 @@ import Service from '../libs/Service';
 export default class ArticleListService extends Service {
     readonly request: ArticleRequest;
     @observable private _query: string = '';
-    @observable private _articleList: ArticleList;
+    @observable articleList: ArticleList;
     @observable private _selectedPage: number = 0;
     @observable private readonly limit: number = 0;
 
     constructor(private readonly type: ArticleListServiceType) {
         super();
+        this.articleList = new ArticleList();
         this.request = ArticleRequest.instance;
         switch (this.type) {
             case ArticleListServiceType.Author:
@@ -56,15 +57,15 @@ export default class ArticleListService extends Service {
     }
 
     @computed get list(): Array<Article> {
-        return this.articleList ? this.articleList.list : [];
+        return this.articleList.list;
     }
 
     @computed get pages(): ReadonlyArray<number> {
-        return this.articleList ? this.articleList.pages : [];
+        return this.articleList.pages;
     }
 
     @computed get selectedPage(): number {
-        return this._selectedPage || 0;
+        return this._selectedPage;
     }
 
     @computed get query(): string {
@@ -80,14 +81,6 @@ export default class ArticleListService extends Service {
         this._query = value;
         this._selectedPage = 0;
         this.update();
-    }
-
-    @computed get articleList(): ArticleList {
-        return this._articleList;
-    }
-
-    set articleList(value: ArticleList) {
-        this._articleList = value;
     }
 
     private async load(param) {
