@@ -2,13 +2,12 @@ import {computed, observable} from "mobx";
 import ArticleListService from '../../services/articleListService';
 import ArticleListServiceType from '../../services/enums/ArticleListServiceType';
 import VM from '../../libs/VM';
-import TagService from '../../services/tagService';
 
 
 export default class MainVM extends VM<ArticleListService> {
     static instance: MainVM;
-    @observable tagClicked: string;
-    @observable private _popularTagList: ReadonlyArray<string> = [];
+    @observable tagClicked: string = '';
+    @observable popularTagList: ReadonlyArray<string> = [];
 
     constructor() {
         super(
@@ -53,10 +52,6 @@ export default class MainVM extends VM<ArticleListService> {
 
     set page(value: number) {
         this.service.selectedPage = value;
-    }
-
-    @computed get popularTagList(): ReadonlyArray<string> {
-        return TagService.tags || [];
     }
 
     updateLike(i: number) {
