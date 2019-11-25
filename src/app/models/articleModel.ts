@@ -1,4 +1,4 @@
-import {observable, computed} from "mobx";
+import {observable} from "mobx";
 import {popItem} from '../libs/lib';
 
 export interface ArticleAuthorVO {
@@ -28,7 +28,7 @@ export default class Article {
     body: string = '';
     isFavorite: boolean = false;
     favoritesCount: number = 0;
-    @observable private tags: Array<string> = [];
+    @observable tagList: Array<string> = [];
 
     constructor(rawData?: ArticleVO) {
         if (rawData) {
@@ -41,20 +41,16 @@ export default class Article {
             this.body = rawData.body;
             this.isFavorite = rawData.favorited;
             this.favoritesCount = rawData.favoritesCount;
-            this.tags = rawData.tagList;
+            this.tagList = rawData.tagList;
         }
     }
 
     addTag(value: string) {
         const tag = value.trim();
-        if (!this.tags.includes(tag) && tag) this.tags.push(tag);
-    }
-
-    @computed get tagList(): Array<string> {
-        return this.tags || [];
+        if (!this.tagList.includes(tag) && tag) this.tagList.push(tag);
     }
 
     removeTag(index: number) {
-        this.tags = popItem(this.tags, index);
+        this.tagList = popItem(this.tagList, index);
     }
 }

@@ -7,7 +7,7 @@ import TagService from '../../services/tagService';
 
 export default class MainVM extends VM<ArticleListService> {
   static instance: MainVM;
-  @observable private _clickedTag: string;
+  @observable tagClicked: string;
   @observable private _popularTagList: ReadonlyArray<string> = [];
 
   constructor() {
@@ -34,15 +34,15 @@ export default class MainVM extends VM<ArticleListService> {
   }
 
   @computed get topPage(): number {
-    return this.serviceSeparator || 0;
+    return this.serviceSeparator;
   }
 
   @computed get clickedTag(): string {
-    return this._clickedTag || '';
+    return this.tagClicked;
   }
 
   set clickedTag(value: string) {
-    this._clickedTag = value;
+    this.tagClicked = value;
     this.topPage = 1;
     this.service.query = value;
   }

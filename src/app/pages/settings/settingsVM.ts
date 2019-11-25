@@ -4,11 +4,11 @@ import UserService from '../../services/userService';
 
 export default class SettingsVM {
     static instance = new SettingsVM();
-    @observable private _email = '';
-    @observable private _bio = '';
-    @observable private _username = '';
-    @observable private _image = '';
-    @observable private _password = '';
+    @observable email = '';
+    @observable bio = '';
+    @observable username = '';
+    @observable image = '';
+    @observable password = '';
 
     initialize() {
         const vm = UserService.instance;
@@ -26,45 +26,5 @@ export default class SettingsVM {
                 UserService.instance.user = user;
                 alert('User data Updated');
             });
-    }
-
-    @computed get email() {
-        return this._email;
-    }
-
-    set email(value) {
-        this._email = value;
-    }
-
-    @computed get bio() {
-        return this._bio;
-    }
-
-    set bio(value) {
-        this._bio = value;
-    }
-
-    @computed get username() {
-        return this._username;
-    }
-
-    set username(value) {
-        this._username = value;
-    }
-
-    @computed get image() {
-        return this._image;
-    }
-
-    set image(value) {
-        this._image = value;
-    }
-
-    @computed get password() {
-        return this._password;
-    }
-
-    set password(value) {
-        this._password = value;
     }
 }

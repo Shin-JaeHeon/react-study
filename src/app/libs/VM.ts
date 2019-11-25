@@ -2,7 +2,7 @@ import {observable, computed} from 'mobx';
 
 export default class VM<T> {
 
-    @observable private _serviceSeparator: number;
+    @observable private _serviceSeparator: number = 0;
 
     constructor(private _service: T, private _service2: T = null) {
     }
